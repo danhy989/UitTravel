@@ -198,7 +198,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'admin','$2a$10$ptCLbxaJ7k7u1Kn185IpnOGYR8/3HL9pMKORoFEJXvDSfE1uBC81W','admin1','admin@gmail.com',12345678,1),(2,'manager','$2a$10$YUGJfbnxV.gdk16uD5d5Q./ZHb4mlGFllzZgodVt1VjczE6A6/6r6','manager1',NULL,NULL,1);
+INSERT INTO `user` VALUES (1,'admin','$2a$10$ptCLbxaJ7k7u1Kn185IpnOGYR8/3HL9pMKORoFEJXvDSfE1uBC81W','admin1','admin@gmail.com',12345678,1),(2,'manager','$2a$10$YUGJfbnxV.gdk16uD5d5Q./ZHb4mlGFllzZgodVt1VjczE6A6/6r6','manager1','manager@gmail.com',4545545,1);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -210,12 +210,12 @@ DROP TABLE IF EXISTS `user_role`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `user_role` (
-  `ID_USER` int(10) NOT NULL,
-  `ID_ROLE` int(10) NOT NULL,
-  PRIMARY KEY (`ID_USER`,`ID_ROLE`),
-  KEY `FK_ROLE` (`ID_ROLE`),
-  CONSTRAINT `FK_ROLE` FOREIGN KEY (`ID_ROLE`) REFERENCES `role` (`ID_ROLE`),
-  CONSTRAINT `FK_USER` FOREIGN KEY (`ID_USER`) REFERENCES `user` (`ID_USER`)
+  `user_id` int(10) NOT NULL,
+  `role_id` int(10) NOT NULL,
+  PRIMARY KEY (`user_id`,`role_id`),
+  KEY `fk_role_idx` (`role_id`),
+  CONSTRAINT `fk_role` FOREIGN KEY (`role_id`) REFERENCES `role` (`ID_ROLE`),
+  CONSTRAINT `fk_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`ID_USER`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -238,4 +238,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-03-21 12:08:07
+-- Dump completed on 2019-03-22  1:36:13

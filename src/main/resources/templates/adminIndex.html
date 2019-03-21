@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Admin Page</title>
+</head>
+<body>
+	<p>Welcome Admin Page</p>
+	<hr>
+	<a href="#" th:href="@{/admin/user}">Redirect to User management page</a>
+	<br>
+	<br>
+	<a href="#" th:href="@{/admin/role}">Redirect to Role management page</a>
+	<br>
+	<br>
+	<a href="#" th:href="@{/admin/api}">Redirect to Api management page</a>
+	<hr>
+	<form action="#" th:action="@{/logout}">
+		<input type="submit" value="Logout"/>
+	</form>
+	
+</body>
+</html>
