@@ -45,7 +45,7 @@ public class TourServiceImpl implements TourService {
 		province.orElseThrow(()-> new NotFoundException("Cant find Province"));
 		Tour tour = new Tour();
 		TourInformation tourInfo = 
-				new TourInformation(tourFull.getDetail(),tourFull.getImageFull()
+				new TourInformation(tourFull.getTitle(),tourFull.getDetail(),tourFull.getImageFull()
 					,tourFull.getPrice(),tourFull.getStatus(),province.get());
 		if(tourFull.getId()==null) {
 			tour = new Tour(tourFull.getName(),tourFull.getImage(),tourInfo);
@@ -71,7 +71,7 @@ public class TourServiceImpl implements TourService {
 		Optional<Tour> tour = tourRepository.findById(Id);
 		tour.orElseThrow(()->new NotFoundException("Cant find tour"));
 		TourInformation tourInfo = tour.get().getTourInfor();
-		return new TourFull(tour.get().getId(),tour.get().getName(),tour.get().getImage()
+		return new TourFull(tour.get().getId(),tourInfo.getTitle(),tour.get().getName(),tour.get().getImage()
 				,tourInfo.getDetail(),tourInfo.getImageFull(),tourInfo.getPrice()
 				,tourInfo.getStatus(),tourInfo.getProvince().getId());
 	}

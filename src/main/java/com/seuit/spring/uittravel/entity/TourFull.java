@@ -5,11 +5,19 @@ public class TourFull {
 	private Integer id;
 	private String name;
 	private String image;
+	private String title;
 	private String detail;
 	private String imageFull;
 	private Double price;
 	private Integer status;
 	private Integer province;
+	
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
 	public String getName() {
 		return name;
 	}
@@ -61,9 +69,10 @@ public class TourFull {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public TourFull(String name, String image, String detail, String imageFull, Double price, Integer status, 
+	public TourFull(String title,String name, String image, String detail, String imageFull, Double price, Integer status, 
 			Integer province) {
 		super();
+		this.title=title;
 		this.name = name;
 		this.image = image;
 		this.detail = detail;
@@ -72,10 +81,11 @@ public class TourFull {
 		this.status = status;
 		this.province = province;
 	}
-	public TourFull(Integer id,String name, String image, String detail, String imageFull, Double price, Integer status, 
+	public TourFull(Integer id,String title ,String name, String image, String detail, String imageFull, Double price, Integer status, 
 			Integer province) {
 		super();
 		this.id  = id;
+		this.title=title;
 		this.name = name;
 		this.image = image;
 		this.detail = detail;
@@ -90,8 +100,10 @@ public class TourFull {
 	}
 	@Override
 	public String toString() {
-		return "TourFull [name=" + name + ", image=" + image + ", detail=" + detail + ", imageFull=" + imageFull
-				+ ", price=" + price + ", status=" + status + ", province=" + province + "]";
+		return "TourFull [id=" + id + ", name=" + name + ", image=" + image + ", title=" + title + ", detail=" + detail
+				+ ", imageFull=" + imageFull + ", price=" + price + ", status=" + status + ", province=" + province
+				+ "]";
 	}
+	
 	
 }

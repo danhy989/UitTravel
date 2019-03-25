@@ -53,7 +53,7 @@ CREATE TABLE `comment` (
   `ID_TOUR_INFO` int(10) NOT NULL,
   PRIMARY KEY (`ID_CMT`),
   KEY `Fk_Comment_Tour_idx` (`ID_TOUR_INFO`),
-  CONSTRAINT `Fk_Comment_Tour` FOREIGN KEY (`ID_TOUR_INFO`) REFERENCES `tour_infomation` (`ID_TOUR_INFO`)
+  CONSTRAINT `Fk_Comment_Tour` FOREIGN KEY (`ID_TOUR_INFO`) REFERENCES `tour_information` (`ID_TOUR_INFO`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -64,6 +64,32 @@ CREATE TABLE `comment` (
 LOCK TABLES `comment` WRITE;
 /*!40000 ALTER TABLE `comment` DISABLE KEYS */;
 /*!40000 ALTER TABLE `comment` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `image`
+--
+
+DROP TABLE IF EXISTS `image`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `image` (
+  `ID_IMAGES` int(10) NOT NULL AUTO_INCREMENT,
+  `URL` varchar(100) DEFAULT NULL,
+  `ID_TOUR_INFO` int(10) DEFAULT NULL,
+  PRIMARY KEY (`ID_IMAGES`),
+  KEY `fk_imageTour_tourInfo_idx` (`ID_TOUR_INFO`),
+  CONSTRAINT `fk_imageTour_tourInfo` FOREIGN KEY (`ID_TOUR_INFO`) REFERENCES `tour_information` (`ID_TOUR_INFO`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `image`
+--
+
+LOCK TABLES `image` WRITE;
+/*!40000 ALTER TABLE `image` DISABLE KEYS */;
+/*!40000 ALTER TABLE `image` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -157,13 +183,13 @@ DROP TABLE IF EXISTS `tour`;
 CREATE TABLE `tour` (
   `ID_TOUR` int(10) NOT NULL AUTO_INCREMENT,
   `NAME` varchar(45) NOT NULL,
-  `IMAGE` varchar(100) NOT NULL,
+  `IMAGE` mediumtext NOT NULL,
   `ID_TOUR_INFO` int(10) DEFAULT NULL,
   PRIMARY KEY (`ID_TOUR`),
   KEY `fk_tour_tourInfor_idx` (`ID_TOUR_INFO`),
-  CONSTRAINT `FKon3ig93q0ipji8yv6btwv0w7l` FOREIGN KEY (`ID_TOUR_INFO`) REFERENCES `tour_infomation` (`ID_TOUR_INFO`),
-  CONSTRAINT `fk_tour_tourInfor` FOREIGN KEY (`ID_TOUR_INFO`) REFERENCES `tour_infomation` (`ID_TOUR_INFO`)
-) ENGINE=InnoDB AUTO_INCREMENT=314 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `FKon3ig93q0ipji8yv6btwv0w7l` FOREIGN KEY (`ID_TOUR_INFO`) REFERENCES `tour_information` (`ID_TOUR_INFO`),
+  CONSTRAINT `fk_tour_tourInfor` FOREIGN KEY (`ID_TOUR_INFO`) REFERENCES `tour_information` (`ID_TOUR_INFO`)
+) ENGINE=InnoDB AUTO_INCREMENT=316 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -172,21 +198,21 @@ CREATE TABLE `tour` (
 
 LOCK TABLES `tour` WRITE;
 /*!40000 ALTER TABLE `tour` DISABLE KEYS */;
-INSERT INTO `tour` VALUES (313,'Vịnh Hạ Long','a',13);
+INSERT INTO `tour` VALUES (313,'Vịnh Hạ Long','https://travel.com.vn/Images/tour/tfd_180518081846_979518.jpg',13),(314,'Cà mau','https://vntrip.cdn.vccloud.vn/cam-nang/wp-content/uploads/2017/08/3-2.jpg',17),(315,'Đà lạt','https://travel.com.vn/Images/destination/dg_150723_Cathedral_of_Da_Lat.jpg',16);
 /*!40000 ALTER TABLE `tour` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `tour_infomation`
+-- Table structure for table `tour_information`
 --
 
-DROP TABLE IF EXISTS `tour_infomation`;
+DROP TABLE IF EXISTS `tour_information`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `tour_infomation` (
+CREATE TABLE `tour_information` (
   `ID_TOUR_INFO` int(10) NOT NULL AUTO_INCREMENT,
+  `TITLE` mediumtext,
   `DETAIL` longtext,
-  `IMAGE_FULL` varchar(100) DEFAULT NULL,
   `PRICE` double DEFAULT NULL,
   `STATUS` tinyint(1) DEFAULT NULL,
   `ID_PROVINCE` int(10) DEFAULT NULL,
@@ -194,17 +220,17 @@ CREATE TABLE `tour_infomation` (
   KEY `Fk_tourInfo_province_idx` (`ID_PROVINCE`),
   CONSTRAINT `FKjity69apuql0dbunw7xut547u` FOREIGN KEY (`ID_PROVINCE`) REFERENCES `province` (`ID_PROVINCE`),
   CONSTRAINT `Fk_tourInfo_province` FOREIGN KEY (`ID_PROVINCE`) REFERENCES `province` (`ID_PROVINCE`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `tour_infomation`
+-- Dumping data for table `tour_information`
 --
 
-LOCK TABLES `tour_infomation` WRITE;
-/*!40000 ALTER TABLE `tour_infomation` DISABLE KEYS */;
-INSERT INTO `tour_infomation` VALUES (13,'a','a',1,1,1);
-/*!40000 ALTER TABLE `tour_infomation` ENABLE KEYS */;
+LOCK TABLES `tour_information` WRITE;
+/*!40000 ALTER TABLE `tour_information` DISABLE KEYS */;
+INSERT INTO `tour_information` VALUES (13,'Khám Phá Vịnh Hạ Long 3 Ngày 2 Đêm Trên Du Thuyền','Nói đến vùng đất Quảng Ninh, du khách sẽ không thể quên Di sản thiên nhiên hạ Long, nơi 2 lần được UNESCO Công nhận là Di sản thiên nghiên thế giới và là tâm điểm trong cuộc bình chọn Hạ Long là Kỳ quan thiên nhiên thế giới cùng với các danh thắng khác của Thế giới. Hạ Long trong truyền thuyến là Nơi rồng giáng, là điềm may cho vùng đất xinh đẹp này. Từ trên cao hạ long như chuỗi ngọc xanh, với những hình thù kỳ lạ như Đỉnh hương, Gà chọi, Chó đá... Hệ thống hang động hấp dẫn nhất là Thiên Cung, hang Đầu Gỗ, động Sửng Sốt, hang Trinh Nữ, động Tam Cung... Bên cạnh đó Quảng Ninh còn có Bãi Cháy Là một bãi tắm rộng và đẹp nằm sát bờ vịnh Hạ Long, có bãi cát dài hơn 500m, rộng 100m.',3000000,1,1),(14,'Khám Phá Vịnh Hạ Long 3 Ngày 2 Đêm Trên Du Thuyền','bbbbbbbbbbb',1,1,2),(16,'Du lịch Đà Lạt  ','Đà Lạt mộng mơ nơi mimosa và ngàn hoa khoe sắc, từ đồi Robin ngắm Hồ Tuyền Lâm, núi Voi, viếng Thiền Viện Trúc Lâm, thăm Dinh Bảo Đại, tản bộ dưới những tán thông, ngắm biệt thự cổ, nhấm nháp ly café ấm áp trong thời tiết se lạnh. Những chuyến xe ngựa thổ mộ chạy quanh Hồ Xuân Hương cũng là nét duyên của Đà Lạt mờ sương.\r\n',1500000,1,1),(17,'Hòn Đá Bạc - Cà mau','Cà mau đẹp nước',500000,1,2);
+/*!40000 ALTER TABLE `tour_information` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -272,4 +298,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-03-25 20:06:02
+-- Dump completed on 2019-03-25 23:53:48

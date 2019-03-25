@@ -33,7 +33,7 @@ public class HomeRestController {
 	}
 	
 	@GetMapping("/tour/{idTourInfo}")
-	public TourInformation showTourInfor(@PathVariable(name="idTourInfo") Integer idTourInfo)
+	public ResponseEntity<TourInformation> showTourInfor(@PathVariable(name="idTourInfo") Integer idTourInfo)
 	{
 		TourInformation tourInfo = new TourInformation();
 		try {
@@ -42,6 +42,6 @@ public class HomeRestController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return tourInfo;
+		return ResponseEntity.ok().body(tourInfo);
 	}
 }

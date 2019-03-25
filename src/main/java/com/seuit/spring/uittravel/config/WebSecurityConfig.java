@@ -9,6 +9,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.seuit.spring.uittravel.service.CustomUserDetailServiceImpl;
 
@@ -20,7 +23,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 }
-	
+	 @Bean
+	    CorsConfigurationSource corsConfigurationSource() {
+	        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+	        source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
+	        return source;
+	    }
 	
 	@Autowired
 	private CustomUserDetailServiceImpl customUserDetailServiceImpl;
@@ -35,13 +43,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/admin/**").hasRole("admin")
+		http
+			.cors()
+			.and()
+			.authorizeRequests().antMatchers("/admin/**").hasRole("admin")
 								.antMatchers("/manager/**").hasRole("manager")
 								.antMatchers("/**").permitAll().and()
 								.formLogin()
 								.successForwardUrl("/loading")
 								.and().logout().permitAll().invalidateHttpSession(true).and().exceptionHandling()
 								.accessDeniedPage("/access-denied");
+								
 
 	}
 

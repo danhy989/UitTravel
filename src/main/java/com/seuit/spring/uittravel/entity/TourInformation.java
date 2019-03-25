@@ -21,6 +21,9 @@ public class TourInformation {
 	@Column(name="ID_TOUR_INFO")
 	private Integer id;
 	
+	@Column(name="TITLE")
+	private String title;
+	
 	@Column(name="DETAIL")
 	private String detail;
 	
@@ -46,6 +49,16 @@ public class TourInformation {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	
+	
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public String getDetail() {
@@ -96,10 +109,10 @@ public class TourInformation {
 		this.province = province;
 	}
 
-	public TourInformation( String detail, String imageFull, Double price, Integer status,
+	public TourInformation( String title,String detail, String imageFull, Double price, Integer status,
 			Province province) {
 		super();
-		
+		this.title= title;
 		this.detail = detail;
 		this.imageFull = imageFull;
 		this.price = price;
@@ -107,9 +120,10 @@ public class TourInformation {
 		
 		this.province = province;
 	}
-	public TourInformation( Integer id,String detail, String imageFull, Double price, Integer status,Tour tour,
+	public TourInformation( Integer id,String title,String detail, String imageFull, Double price, Integer status,Tour tour,
 			Province province) {
 		super();
+		this.title= title;
 		this.id = id;
 		this.detail = detail;
 		this.imageFull = imageFull;

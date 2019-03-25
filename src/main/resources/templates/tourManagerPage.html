@@ -360,12 +360,17 @@ table.table .avatar {
 							aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body">
+						
 						<div class="form-group">
 							<label>Name</label> <input th:field="*{name}" type="text"
 								class="form-control" required>
 						</div>
 						<div class="form-group">
 							<label>Image</label> <input th:field="*{image}" type="text"
+								class="form-control" required>
+						</div>
+						<div class="form-group">
+							<label>Title</label> <input th:field="*{title}" type="text"
 								class="form-control" required>
 						</div>
 						<div class="form-group">

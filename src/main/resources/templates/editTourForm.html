@@ -216,13 +216,17 @@ table.table td i {
 			<h4 class="modal-title">Edit Tour</h4>
 		</div>
 		<div class="modal-body">
-			<input type="text" th:field="*{id}">
+			<input type="hidden" th:field="*{id}">
 			<div class="form-group">
 				<label>Name</label> <input th:field="*{name}" type="text"
 					class="form-control" required>
 			</div>
 			<div class="form-group">
 				<label>Image</label> <input th:field="*{image}" type="text"
+					class="form-control" required>
+			</div>
+			<div class="form-group">
+				<label>Title</label> <input th:field="*{title}" type="text"
 					class="form-control" required>
 			</div>
 			<div class="form-group">
