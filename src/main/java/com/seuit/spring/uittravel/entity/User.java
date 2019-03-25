@@ -14,6 +14,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -25,17 +32,23 @@ public class User {
 	@Column(name="ID_USER")
 	private Integer id;
 	
+
 	@Column(name="USERNAME")
 	private String username;
+	
 	
 	@Column(name="PASSWORD")
 	private String password;
 	
+	
 	@Column(name="NAME")
 	private String name;
 	
+	
+	
 	@Column(name="EMAIL")
 	private String email;
+	
 	
 	@Column(name="PHONE")
 	private Long phone;
@@ -44,7 +57,7 @@ public class User {
 	private Integer status;
 	
 	
-	@ManyToMany(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
+	@ManyToMany(fetch=FetchType.EAGER,cascade={CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
 	@JoinTable(name="user_role",joinColumns=@JoinColumn(name="user_id")
 				,inverseJoinColumns=@JoinColumn(name="role_id"))
 	@JsonIgnore

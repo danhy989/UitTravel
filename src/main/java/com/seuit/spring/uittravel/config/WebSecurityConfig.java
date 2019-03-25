@@ -21,6 +21,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		return new BCryptPasswordEncoder();
 }
 	
+	
 	@Autowired
 	private CustomUserDetailServiceImpl customUserDetailServiceImpl;
 
@@ -35,8 +36,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/admin/**").hasRole("admin")
+								.antMatchers("/manager/**").hasRole("manager")
 								.antMatchers("/**").permitAll().and()
-								.formLogin().and().logout().permitAll().invalidateHttpSession(true).and().exceptionHandling()
+								.formLogin()
+								.successForwardUrl("/loading")
+								.and().logout().permitAll().invalidateHttpSession(true).and().exceptionHandling()
 								.accessDeniedPage("/access-denied");
 
 	}

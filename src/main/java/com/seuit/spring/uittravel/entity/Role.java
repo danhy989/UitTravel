@@ -28,7 +28,7 @@ public class Role {
 	@Column(name="ROLE")
 	private String role;
 	
-	@ManyToMany(mappedBy="roles")
+	@ManyToMany(mappedBy="roles",cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
 	@JsonIgnore
 	private Set<User> users = new HashSet<User>();
 	
