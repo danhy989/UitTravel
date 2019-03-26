@@ -231,24 +231,28 @@ table.table td i {
 			</div>
 			<div class="form-group">
 				<label>Detail</label> <br />
-				<textarea rows="5" cols="40" th:field="*{detail}" required>
+				<textarea rows="5" class="form-control" th:field="*{detail}" required>
          					</textarea>
 			</div>
 			<div class="form-group">
-				<label>Image Full</label> <input th:field="*{imageFull}" type="text"
+				<label>Price</label> <input th:field="*{price}" type="number"
 					class="form-control" required>
 			</div>
 			<div class="form-group">
-				<label>Price</label> <input th:field="*{price}" type="text"
+				<label>Status</label> <input th:field="*{status}" type="number"
 					class="form-control" required>
 			</div>
 			<div class="form-group">
-				<label>Status</label> <input th:field="*{status}" type="text"
+				<label>Province</label> <input th:field="*{province}" type="number"
 					class="form-control" required>
 			</div>
 			<div class="form-group">
-				<label>Province</label> <input th:field="*{province}" type="text"
+				<label>Images</label> 
+				<th:block th:each="imageTemp,start : *{images}">
+					<input th:field="*{images[__${start.index}__]}" type="text"
 					class="form-control" required>
+					</br>
+				</th:block>
 			</div>
 		</div>
 		<div class="modal-footer">

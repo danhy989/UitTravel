@@ -1,5 +1,8 @@
 package com.seuit.spring.uittravel.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,13 +11,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name="tour_infomation")
+@Table(name="tour_information")
 public class TourInformation {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -27,8 +31,6 @@ public class TourInformation {
 	@Column(name="DETAIL")
 	private String detail;
 	
-	@Column(name="IMAGE_FULL")
-	private String imageFull;
 	
 	@Column(name="PRICE")
 	private Double price;
@@ -42,6 +44,10 @@ public class TourInformation {
 	@ManyToOne
 	@JoinColumn(name="ID_PROVINCE")
 	private Province province;
+	
+	@OneToMany(mappedBy="tourInfo",cascade=CascadeType.ALL)
+	private Set<Image> images = new HashSet<Image>();
+	
 
 	public Integer getId() {
 		return id;
@@ -69,13 +75,6 @@ public class TourInformation {
 		this.detail = detail;
 	}
 
-	public String getImageFull() {
-		return imageFull;
-	}
-
-	public void setImageFull(String imageFull) {
-		this.imageFull = imageFull;
-	}
 
 	public Double getPrice() {
 		return price;
@@ -108,29 +107,37 @@ public class TourInformation {
 	public void setProvince(Province province) {
 		this.province = province;
 	}
+	
+	
 
-	public TourInformation( String title,String detail, String imageFull, Double price, Integer status,
-			Province province) {
-		super();
-		this.title= title;
-		this.detail = detail;
-		this.imageFull = imageFull;
-		this.price = price;
-		this.status = status;
-		
-		this.province = province;
+	public Set<Image> getImages() {
+		return images;
 	}
-	public TourInformation( Integer id,String title,String detail, String imageFull, Double price, Integer status,Tour tour,
-			Province province) {
+
+	public void setImages(Set<Image> images) {
+		this.images = images;
+	}
+
+	
+	public TourInformation(String title, String detail, Double price, Integer status) {
 		super();
-		this.title= title;
-		this.id = id;
+		this.title = title;
 		this.detail = detail;
-		this.imageFull = imageFull;
 		this.price = price;
 		this.status = status;
-		this.tour=tour;
+	}
+
+	public TourInformation(Integer id, String title, String detail, Double price, Integer status, Tour tour,
+			Province province, Set<Image> images) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.detail = detail;
+		this.price = price;
+		this.status = status;
+		this.tour = tour;
 		this.province = province;
+		this.images = images;
 	}
 
 	public TourInformation() {
@@ -140,7 +147,7 @@ public class TourInformation {
 
 	@Override
 	public String toString() {
-		return "TourInformation [id=" + id + ", detail=" + detail + ", imageFull=" + imageFull + ", price=" + price
+		return "TourInformation [id=" + id + ", detail=" + detail + ", price=" + price
 				+ ", status=" + status + ", tour=" + tour + ", province=" + province + "]";
 	}
 	

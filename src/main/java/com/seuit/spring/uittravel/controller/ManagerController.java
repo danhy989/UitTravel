@@ -39,7 +39,8 @@ public class ManagerController {
 	public String showTourManagementPage(Model model) {
 		List<Tour> listTour = tourService.getAllTour();
 		model.addAttribute("listTour", listTour);
-		model.addAttribute("tour",new TourFull());
+		TourFull tourFull = new TourFull();
+		model.addAttribute("tour",tourFull);
 		return "tourManagerPage";
 	}
 

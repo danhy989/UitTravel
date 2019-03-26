@@ -1,5 +1,7 @@
 package com.seuit.spring.uittravel.entity;
 
+import java.util.Set;
+
 public class TourFull {
 
 	private Integer id;
@@ -7,7 +9,7 @@ public class TourFull {
 	private String image;
 	private String title;
 	private String detail;
-	private String imageFull;
+	private Set<String> images;
 	private Double price;
 	private Integer status;
 	private Integer province;
@@ -36,11 +38,12 @@ public class TourFull {
 	public void setDetail(String detail) {
 		this.detail = detail;
 	}
-	public String getImageFull() {
-		return imageFull;
+	
+	public Set<String> getImages() {
+		return images;
 	}
-	public void setImageFull(String imageFull) {
-		this.imageFull = imageFull;
+	public void setImages(Set<String> images) {
+		this.images = images;
 	}
 	public Double getPrice() {
 		return price;
@@ -62,34 +65,35 @@ public class TourFull {
 	}
 	
 	
-	
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public TourFull(String title,String name, String image, String detail, String imageFull, Double price, Integer status, 
-			Integer province) {
+	
+	public TourFull(String name, String image, String title, String detail, Set<String> images,
+			Double price, Integer status, Integer province) {
 		super();
-		this.title=title;
 		this.name = name;
 		this.image = image;
+		this.title = title;
 		this.detail = detail;
-		this.imageFull = imageFull;
+		this.images = images;
 		this.price = price;
 		this.status = status;
 		this.province = province;
 	}
-	public TourFull(Integer id,String title ,String name, String image, String detail, String imageFull, Double price, Integer status, 
-			Integer province) {
+
+	public TourFull(Integer id, String name, String image, String title, String detail, Set<String> images,
+			Double price, Integer status, Integer province) {
 		super();
-		this.id  = id;
-		this.title=title;
+		this.id = id;
 		this.name = name;
 		this.image = image;
+		this.title = title;
 		this.detail = detail;
-		this.imageFull = imageFull;
+		this.images = images;
 		this.price = price;
 		this.status = status;
 		this.province = province;
@@ -101,8 +105,7 @@ public class TourFull {
 	@Override
 	public String toString() {
 		return "TourFull [id=" + id + ", name=" + name + ", image=" + image + ", title=" + title + ", detail=" + detail
-				+ ", imageFull=" + imageFull + ", price=" + price + ", status=" + status + ", province=" + province
-				+ "]";
+				+ ", images=" + images + ", price=" + price + ", status=" + status + ", province=" + province + "]";
 	}
 	
 	

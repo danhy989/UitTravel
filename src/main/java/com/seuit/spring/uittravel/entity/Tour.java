@@ -66,11 +66,10 @@ public class Tour {
 		this.tourInfor = tourInfor;
 	}
 
-	public Tour(String name, String image,TourInformation tourInfo) {
+	public Tour(String name, String image) {
 		super();
 		this.name = name;
 		this.image = image;
-		this.tourInfor = tourInfo;
 	}
 	
 	public Tour(Integer id,String name, String image,TourInformation tourInfo) {

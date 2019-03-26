@@ -1,13 +1,16 @@
 package com.seuit.spring.uittravel.service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.seuit.spring.uittravel.entity.Image;
 import com.seuit.spring.uittravel.entity.Province;
 import com.seuit.spring.uittravel.entity.Tour;
 import com.seuit.spring.uittravel.entity.TourFull;
@@ -41,20 +44,45 @@ public class TourServiceImpl implements TourService {
 	@Override
 	@Transactional
 	public void addTour(TourFull tourFull) throws NotFoundException {
+		
+		Set<String> listImage = new HashSet<String>();
+		listImage.add("123");
+		listImage.add("456");
+		tourFull.setImages(listImage);
+		
+		//init province
 		Optional<Province> province = provinceRepository.findById(tourFull.getProvince());
 		province.orElseThrow(()-> new NotFoundException("Cant find Province"));
-		Tour tour = new Tour();
-		TourInformation tourInfo = 
-				new TourInformation(tourFull.getTitle(),tourFull.getDetail(),tourFull.getImageFull()
-					,tourFull.getPrice(),tourFull.getStatus(),province.get());
-		if(tourFull.getId()==null) {
-			tour = new Tour(tourFull.getName(),tourFull.getImage(),tourInfo);
-			tourRepository.save(tour);
-		}else {
-			tour = new Tour(tourFull.getId(),tourFull.getName(),tourFull.getImage(),tourInfo);
-			tourRepository.save(tour);
+		//init 
+		Tour tour = new Tour(tourFull.getName(),tourFull.getImage());
+		TourInformation tourInfo = new TourInformation(tourFull.getTitle(),tourFull.getDetail()
+				,tourFull.getPrice(),tourFull.getStatus());
+		Set<Image> images = new HashSet<Image>();
+		Set<TourInformation> listTourInfo = new HashSet<TourInformation>();
+	
+		//Set<String> => Set<Image>
+		if(tourFull.getImages()!=null) {
+			for (String imageString : tourFull.getImages()) {
+				images.add(new Image(imageString));
+			}
 		}
 		
+		//TOurInfo - province
+		listTourInfo.add(tourInfo);
+		province.get().setTourInformation(listTourInfo);
+		tourInfo.setProvince(province.get());
+		
+		//TourInfo - image
+		for (Image image : images) {
+			image.setTourInfo(tourInfo);
+		}
+		tourInfo.setImages(images);
+		
+		//Tour - TourInfo
+		tourInfo.setTour(tour);
+		tour.setTourInfor(tourInfo);
+		
+		tourRepository.save(tour);
 	}
 
 	@Override
@@ -71,9 +99,18 @@ public class TourServiceImpl implements TourService {
 		Optional<Tour> tour = tourRepository.findById(Id);
 		tour.orElseThrow(()->new NotFoundException("Cant find tour"));
 		TourInformation tourInfo = tour.get().getTourInfor();
-		return new TourFull(tour.get().getId(),tourInfo.getTitle(),tour.get().getName(),tour.get().getImage()
-				,tourInfo.getDetail(),tourInfo.getImageFull(),tourInfo.getPrice()
-				,tourInfo.getStatus(),tourInfo.getProvince().getId());
+		
+		//set<images> to set<string>
+		Set<String> images = new HashSet<String>();
+		if(tourInfo.getImages()!=null) {
+			for (Image image : tourInfo.getImages()) {
+				images.add(image.getUrl());
+			}
+		}
+		
+		return new TourFull(tour.get().getId(),tour.get().getName(),tour.get().getImage(),
+				tourInfo.getTitle(),tourInfo.getDetail(),images
+				,tourInfo.getPrice(),tourInfo.getStatus(),tourInfo.getProvince().getId());
 	}
 
 	@Override
