@@ -27,9 +27,9 @@ public class HomeRestController {
 	
 	
 	@GetMapping("/tour")
-	public List<Tour> showTour() {
+	public ResponseEntity<List<Tour>> showTour() {
 		List<Tour> tours = tourService.getAllTour();
-		return tours;
+		return ResponseEntity.ok().body(tours);
 	}
 	
 	@GetMapping("/tour/{idTourInfo}")

@@ -127,17 +127,13 @@ public class TourInformation {
 		this.status = status;
 	}
 
-	public TourInformation(Integer id, String title, String detail, Double price, Integer status, Tour tour,
-			Province province, Set<Image> images) {
+	public TourInformation(Integer id, String title, String detail, Double price, Integer status ) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.detail = detail;
 		this.price = price;
 		this.status = status;
-		this.tour = tour;
-		this.province = province;
-		this.images = images;
 	}
 
 	public TourInformation() {

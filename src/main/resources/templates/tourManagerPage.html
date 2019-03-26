@@ -375,7 +375,8 @@ table.table .avatar {
 						</div>
 						<div class="form-group">
 							<label>Detail</label> <br />
-							<textarea rows="5" class="form-control" th:field="*{detail}" required>
+							<textarea rows="5" class="form-control" th:field="*{detail}"
+								required>
          					</textarea>
 						</div>
 						<div class="form-group">
@@ -391,8 +392,12 @@ table.table .avatar {
 								type="number" class="form-control" required>
 						</div>
 						<div class="form-group">
-							<input th:field="*{images}"
-								type="hidden" class="form-control" required>
+							<label>Images</label>
+							<th:block th:each="imageTemp,start : *{images}">
+								<input th:field="*{images[__${start.index}__]}" type="text"
+									class="form-control" >
+								<br>
+							</th:block>
 						</div>
 					</div>
 					<div class="modal-footer">

@@ -14,4 +14,6 @@ public interface TourService {
 	void deleteTour(Integer Id);
 	TourFull findTourFullById(Integer Id) throws NotFoundException;
 	TourInformation findTourInforById(Integer Id) throws NotFoundException;
+	void updateTour(TourFull tourFull) throws NotFoundException;
+	Tour findTourById(Integer Id) throws NotFoundException;
 }

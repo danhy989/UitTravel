@@ -1,6 +1,9 @@
 package com.seuit.spring.uittravel.controller;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,14 +43,29 @@ public class ManagerController {
 		List<Tour> listTour = tourService.getAllTour();
 		model.addAttribute("listTour", listTour);
 		TourFull tourFull = new TourFull();
+		List<String> listImage = new ArrayList<String>();
+		for(int i=5;i>0;i--) {
+			listImage.add("");
+		}
+		tourFull.setImages(listImage);
 		model.addAttribute("tour",tourFull);
 		return "tourManagerPage";
 	}
 
 	@PostMapping("/tour/saveTour")
-	public String saveUser(@ModelAttribute("tour") TourFull tourFull,Model model,RedirectAttributes redirect) {
+	public String saveTour(@ModelAttribute("tour") TourFull tourFull,Model model,RedirectAttributes redirect) {
 		try {
 			tourService.addTour(tourFull);
+		} catch (NotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "redirect:/manager/tour";
+	}
+	@PostMapping("/tour/updateTour")
+	public String updateTour(@ModelAttribute("tour") TourFull tourFull,Model model,RedirectAttributes redirect) {
+		try {
+			tourService.updateTour(tourFull);
 		} catch (NotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

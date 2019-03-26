@@ -72,12 +72,12 @@ public class Tour {
 		this.image = image;
 	}
 	
-	public Tour(Integer id,String name, String image,TourInformation tourInfo) {
+	public Tour(Integer id,String name, String image) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.image = image;
-		this.tourInfor = tourInfo;
+		
 	}
 	
 

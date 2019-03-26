@@ -210,7 +210,7 @@ table.table td i {
 </style>
 </head>
 <body>
-	<form action="#" th:action="@{/manager/tour/saveTour}"
+	<form action="#" th:action="@{/manager/tour/updateTour}"
 		th:object="${tourFull}" method="POST">
 		<div class="modal-header">
 			<h4 class="modal-title">Edit Tour</h4>
@@ -231,7 +231,8 @@ table.table td i {
 			</div>
 			<div class="form-group">
 				<label>Detail</label> <br />
-				<textarea rows="5" class="form-control" th:field="*{detail}" required>
+				<textarea rows="5" class="form-control" th:field="*{detail}"
+					required>
          					</textarea>
 			</div>
 			<div class="form-group">
@@ -247,11 +248,11 @@ table.table td i {
 					class="form-control" required>
 			</div>
 			<div class="form-group">
-				<label>Images</label> 
+				<label>Images</label>
 				<th:block th:each="imageTemp,start : *{images}">
 					<input th:field="*{images[__${start.index}__]}" type="text"
-					class="form-control" required>
-					</br>
+						class="form-control">
+					<br>
 				</th:block>
 			</div>
 		</div>

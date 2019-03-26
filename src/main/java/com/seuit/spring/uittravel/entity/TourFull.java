@@ -1,6 +1,7 @@
 package com.seuit.spring.uittravel.entity;
 
-import java.util.Set;
+import java.util.List;
+
 
 public class TourFull {
 
@@ -9,7 +10,7 @@ public class TourFull {
 	private String image;
 	private String title;
 	private String detail;
-	private Set<String> images;
+	private List<String> images;
 	private Double price;
 	private Integer status;
 	private Integer province;
@@ -39,10 +40,10 @@ public class TourFull {
 		this.detail = detail;
 	}
 	
-	public Set<String> getImages() {
+	public List<String> getImages() {
 		return images;
 	}
-	public void setImages(Set<String> images) {
+	public void setImages(List<String> images) {
 		this.images = images;
 	}
 	public Double getPrice() {
@@ -72,7 +73,11 @@ public class TourFull {
 		this.id = id;
 	}
 	
-	public TourFull(String name, String image, String title, String detail, Set<String> images,
+	public void addImage(String image) {
+		this.images.add(image);
+	}
+	
+	public TourFull(String name, String image, String title, String detail, List<String> images,
 			Double price, Integer status, Integer province) {
 		super();
 		this.name = name;
@@ -85,7 +90,7 @@ public class TourFull {
 		this.province = province;
 	}
 
-	public TourFull(Integer id, String name, String image, String title, String detail, Set<String> images,
+	public TourFull(Integer id, String name, String image, String title, String detail, List<String> images,
 			Double price, Integer status, Integer province) {
 		super();
 		this.id = id;
