@@ -1,0 +1,16 @@
+{
+  "id": 13,
+  "detail": "a",
+  "imageFull": "a",
+  "price": 1,
+  "status": 1,
+  "tour": {
+    "id": 313,
+    "name": "Vịnh Hạ Long",
+    "image": "a"
+  },
+  "province": {
+    "id": 1,
+    "name": "Ho Chi Minh"
+  }
+}
