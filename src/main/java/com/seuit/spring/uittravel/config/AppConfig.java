@@ -12,7 +12,7 @@ import com.seuit.spring.uittravel.aspects.LoggerAspectJ;
 @ComponentScan
 public class AppConfig {
 	@Bean
-	 public LoggerAspectJ loggingAspect(){
-        return new LoggerAspectJ();
-    }
+	public LoggerAspectJ loggingAspect() {
+		return new LoggerAspectJ();
+	}
 }

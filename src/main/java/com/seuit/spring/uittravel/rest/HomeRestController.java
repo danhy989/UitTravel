@@ -1,9 +1,6 @@
 package com.seuit.spring.uittravel.rest;
 
 import java.util.List;
-import java.util.logging.Logger;
-
-import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,17 +21,15 @@ import javassist.NotFoundException;
 public class HomeRestController {
 	@Autowired
 	private TourService tourService;
-	
-	
+
 	@GetMapping("/tour")
 	public ResponseEntity<List<Tour>> showTour() {
 		List<Tour> tours = tourService.getAllTour();
 		return ResponseEntity.ok().body(tours);
 	}
-	
+
 	@GetMapping("/tour/{idTourInfo}")
-	public ResponseEntity<TourInformation> showTourInfor(@PathVariable(name="idTourInfo") Integer idTourInfo)
-	{
+	public ResponseEntity<TourInformation> showTourInfor(@PathVariable(name = "idTourInfo") Integer idTourInfo) {
 		TourInformation tourInfo = new TourInformation();
 		try {
 			tourInfo = tourService.findTourInforById(idTourInfo);
@@ -44,4 +39,22 @@ public class HomeRestController {
 		}
 		return ResponseEntity.ok().body(tourInfo);
 	}
+
+	@GetMapping("/tour/area/{areaId}")
+	public ResponseEntity<List<Tour>> showTourWithArea(@PathVariable(name = "areaId") Integer areaId) {
+		List<Tour> listTour = tourService.getAllTourByAreaId(areaId);
+		return ResponseEntity.ok().body(listTour);
+	}
+
+	@GetMapping("/tour/province/{provinceId}")
+	public ResponseEntity<List<Tour>> showTourWithProvince(@PathVariable(name = "provinceId") Integer provinceId) {
+		List<Tour> listTour = tourService.getAllTourByProvinceId(provinceId);
+		return ResponseEntity.ok().body(listTour);
+	}
+
+	@GetMapping("/tour/topOrder")
+	public ResponseEntity<List<Tour>> showTourTopOrder() {
+		return ResponseEntity.ok().body(tourService.getTopTourOrder());
+	}
+
 }

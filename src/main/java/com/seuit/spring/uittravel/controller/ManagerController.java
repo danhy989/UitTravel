@@ -1,9 +1,7 @@
 package com.seuit.spring.uittravel.controller;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,45 +13,42 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import com.seuit.spring.uittravel.entity.Province;
 import com.seuit.spring.uittravel.entity.Tour;
 import com.seuit.spring.uittravel.entity.TourFull;
-import com.seuit.spring.uittravel.entity.TourInformation;
-import com.seuit.spring.uittravel.entity.User;
 import com.seuit.spring.uittravel.service.TourService;
 
 import javassist.NotFoundException;
 
 @Controller
-@RequestMapping(value="/manager")
+@RequestMapping(value = "/manager")
 public class ManagerController {
-	
+
 	Logger logger = Logger.getLogger(this.getClass().getName());
-	
+
 	@Autowired
 	private TourService tourService;
-	
+
 	@GetMapping("")
 	public String showIndex() {
-			return "managerPage";
+		return "managerPage";
 	}
+
 	@GetMapping("/tour")
 	public String showTourManagementPage(Model model) {
 		List<Tour> listTour = tourService.getAllTour();
 		model.addAttribute("listTour", listTour);
 		TourFull tourFull = new TourFull();
 		List<String> listImage = new ArrayList<String>();
-		for(int i=5;i>0;i--) {
+		for (int i = 5; i > 0; i--) {
 			listImage.add("");
 		}
 		tourFull.setImages(listImage);
-		model.addAttribute("tour",tourFull);
+		model.addAttribute("tour", tourFull);
 		return "tourManagerPage";
 	}
 
 	@PostMapping("/tour/saveTour")
-	public String saveTour(@ModelAttribute("tour") TourFull tourFull,Model model,RedirectAttributes redirect) {
+	public String saveTour(@ModelAttribute("tour") TourFull tourFull, Model model, RedirectAttributes redirect) {
 		try {
 			tourService.addTour(tourFull);
 		} catch (NotFoundException e) {
@@ -62,8 +57,9 @@ public class ManagerController {
 		}
 		return "redirect:/manager/tour";
 	}
+
 	@PostMapping("/tour/updateTour")
-	public String updateTour(@ModelAttribute("tour") TourFull tourFull,Model model,RedirectAttributes redirect) {
+	public String updateTour(@ModelAttribute("tour") TourFull tourFull, Model model, RedirectAttributes redirect) {
 		try {
 			tourService.updateTour(tourFull);
 		} catch (NotFoundException e) {
@@ -74,13 +70,13 @@ public class ManagerController {
 	}
 
 	@PostMapping("/tour/deleteTour/{tourId}")
-	public String deletteTour(@PathVariable(value = "tourId") Integer tourId,RedirectAttributes redirect){
+	public String deletteTour(@PathVariable(value = "tourId") Integer tourId, RedirectAttributes redirect) {
 		tourService.deleteTour(tourId);
 		return "redirect:/manager/tour";
 	}
 
 	@GetMapping("/tour/editTourForm/{tourId}")
-	public String showEditTourForm(@PathVariable(value = "tourId") Integer tourId,Model model){
+	public String showEditTourForm(@PathVariable(value = "tourId") Integer tourId, Model model) {
 		TourFull tourFull = new TourFull();
 		try {
 			tourFull = tourService.findTourFullById(tourId);
@@ -88,7 +84,7 @@ public class ManagerController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		model.addAttribute("tourFull",tourFull);
+		model.addAttribute("tourFull", tourFull);
 		return "editTourForm";
 	}
 }

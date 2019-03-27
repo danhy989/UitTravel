@@ -1,6 +1,5 @@
 package com.seuit.spring.uittravel.service;
 
-import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,13 +17,13 @@ public class CustomUserDetailServiceImpl implements UserDetailsService {
 
 	@Autowired
 	private UserRepository userRepository;
-	
+
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		
+
 		Optional<User> userOptinal = userRepository.findByUsername(username);
 		userOptinal.orElseThrow(() -> new UsernameNotFoundException("Cant find user"));
-		return userOptinal.map((user)->new CustomUserDetail(user)).get();
+		return userOptinal.map((user) -> new CustomUserDetail(user)).get();
 	}
 
 }

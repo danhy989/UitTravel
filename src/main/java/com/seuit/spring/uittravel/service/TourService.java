@@ -10,10 +10,22 @@ import javassist.NotFoundException;
 
 public interface TourService {
 	List<Tour> getAllTour();
+
 	void addTour(TourFull tourFull) throws NotFoundException;
+
 	void deleteTour(Integer Id);
+
 	TourFull findTourFullById(Integer Id) throws NotFoundException;
+
 	TourInformation findTourInforById(Integer Id) throws NotFoundException;
+
 	void updateTour(TourFull tourFull) throws NotFoundException;
+
 	Tour findTourById(Integer Id) throws NotFoundException;
+
+	List<Tour> getAllTourByAreaId(Integer Id);
+
+	List<Tour> getAllTourByProvinceId(Integer Id);
+
+	List<Tour> getTopTourOrder();
 }

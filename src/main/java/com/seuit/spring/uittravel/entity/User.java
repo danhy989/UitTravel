@@ -14,55 +14,40 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
-import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name="user")
+@Table(name = "user")
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="ID_USER")
+	@Column(name = "ID_USER")
 	private Integer id;
-	
 
-	@Column(name="USERNAME")
+	@Column(name = "USERNAME")
 	private String username;
-	
-	
-	@Column(name="PASSWORD")
+
+	@Column(name = "PASSWORD")
 	private String password;
-	
-	
-	@Column(name="NAME")
+
+	@Column(name = "NAME")
 	private String name;
-	
-	
-	
-	@Column(name="EMAIL")
+
+	@Column(name = "EMAIL")
 	private String email;
-	
-	
-	@Column(name="PHONE")
+
+	@Column(name = "PHONE")
 	private Long phone;
-	
-	@Column(name="STATUS")
+
+	@Column(name = "STATUS")
 	private Integer status;
-	
-	
-	@ManyToMany(fetch=FetchType.EAGER,cascade={CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
-	@JoinTable(name="user_role",joinColumns=@JoinColumn(name="user_id")
-				,inverseJoinColumns=@JoinColumn(name="role_id"))
+
+	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
+			CascadeType.REFRESH })
+	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	@JsonIgnore
 	private Set<Role> roles = new HashSet<Role>();
-	
 
 	public Integer getId() {
 		return id;
@@ -119,8 +104,6 @@ public class User {
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
-	
-
 
 	public Set<Role> getRoles() {
 		return roles;
@@ -140,9 +123,6 @@ public class User {
 		this.status = user.status;
 		this.roles = user.roles;
 	}
-	
-	
-
 
 	public User(Integer id, String username, String password, String name, String email, Long phone, Integer status,
 			Set<Role> roles) {
@@ -156,9 +136,6 @@ public class User {
 		this.status = status;
 		this.roles = roles;
 	}
-	
-	
-	
 
 	public User() {
 		super();
@@ -170,10 +147,5 @@ public class User {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", name=" + name + ", email="
 				+ email + ", phone=" + phone + ", status=" + status + ", roles=" + roles + "]";
 	}
-	
-	
-	
-	
-	
-	
+
 }

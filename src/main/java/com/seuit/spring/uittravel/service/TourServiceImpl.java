@@ -5,10 +5,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.logging.Logger;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +17,6 @@ import com.seuit.spring.uittravel.entity.Province;
 import com.seuit.spring.uittravel.entity.Tour;
 import com.seuit.spring.uittravel.entity.TourFull;
 import com.seuit.spring.uittravel.entity.TourInformation;
-import com.seuit.spring.uittravel.entity.User;
 import com.seuit.spring.uittravel.repository.ProvinceRepository;
 import com.seuit.spring.uittravel.repository.TourInforRepository;
 import com.seuit.spring.uittravel.repository.TourRepository;
@@ -27,7 +26,8 @@ import javassist.NotFoundException;
 @Service
 public class TourServiceImpl implements TourService {
 
-	private Logger logger = Logger.getLogger(this.getClass().getName());
+	@Autowired
+	private EntityManagerFactory entityManagerFactory;
 
 	@Autowired
 	private TourRepository tourRepository;
@@ -48,6 +48,8 @@ public class TourServiceImpl implements TourService {
 	@Override
 	@Transactional
 	public void addTour(TourFull tourFull) throws NotFoundException {
+		
+		tourFull.setStatus(1);
 		// init province
 		Optional<Province> province = provinceRepository.findById(tourFull.getProvince());
 		province.orElseThrow(() -> new NotFoundException("Cant find Province"));
@@ -101,22 +103,22 @@ public class TourServiceImpl implements TourService {
 		tourInfo.setPrice(tourFull.getPrice());
 		tourInfo.setStatus(tourFull.getStatus());
 		tourInfo.setTitle(tourFull.getTitle());
-		
+
 		province.setId(tourFull.getProvince());
-		
-		if(tourFull.getImages()!=null) {
+
+		if (tourFull.getImages() != null) {
 			for (String imageString : tourFull.getImages()) {
 				imagesTemp.add(new Image(imageString));
 			}
-			
-			for(int i=0;i<1;i++) {
+
+			for (int i = 0; i < 1; i++) {
 				for (Image image : images) {
 					image.setUrl(tourFull.getImages().get(i));
 					i++;
 				}
 			}
 		}
-		
+
 		tourRepository.save(tour);
 	}
 
@@ -165,7 +167,45 @@ public class TourServiceImpl implements TourService {
 		tour.orElseThrow(() -> new NotFoundException("Cant find tourInfo"));
 		return tour.get();
 	}
-	
-	
+
+	@SuppressWarnings("unchecked")
+	@Override
+	@Transactional
+	public List<Tour> getAllTourByAreaId(Integer Id) {
+		// TODO Auto-generated method stub
+		EntityManager entity = entityManagerFactory.createEntityManager();
+		String sql = "select t,tif.price " + "from Area a " + "inner join Province p on a.id=p.area "
+				+ "inner join TourInformation tif on p.id=tif.province " + "inner join Tour t on t.tourInfor=tif.id "
+				+ "where a.id=:areaId ORDER BY rand()";
+		javax.persistence.Query query = entity.createQuery(sql).setMaxResults(3);
+		query.setParameter("areaId", Id);
+		return query.getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	@Transactional
+	public List<Tour> getAllTourByProvinceId(Integer Id) {
+		// TODO Auto-generated method stub
+		EntityManager entity = entityManagerFactory.createEntityManager();
+		String sql = "select t " + "from Province p " + "inner join TourInformation tif on p.id=tif.province "
+				+ "inner join Tour t on t.tourInfor=tif.id " + "where p.id=:provinceId";
+		javax.persistence.Query query = entity.createQuery(sql);
+		query.setParameter("provinceId", Id);
+		return query.getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	@Transactional
+	public List<Tour> getTopTourOrder() {
+		// TODO Auto-generated method stub
+		EntityManager entity = entityManagerFactory.createEntityManager();
+		String sql = "select t,tif.price,count(o.tour) " + "from Order o " + "inner join Tour t on t.id=o.tour.id "
+				+ "inner join TourInformation tif on tif.id=t.tourInfor " + "group by o.tour "
+				+ "order by count(o.tour) desc";
+		javax.persistence.Query query = entity.createQuery(sql).setMaxResults(8);
+		return query.getResultList();
+	}
 
 }

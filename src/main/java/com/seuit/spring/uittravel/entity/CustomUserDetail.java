@@ -4,12 +4,11 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-public class CustomUserDetail extends User implements UserDetails{
+public class CustomUserDetail extends User implements UserDetails {
 
 	/**
 	 * 
@@ -20,17 +19,18 @@ public class CustomUserDetail extends User implements UserDetails{
 		// TODO Auto-generated constructor stub
 		super(user);
 	}
+
 	public CustomUserDetail() {
 		// TODO Auto-generated constructor stub
 		super();
 	}
-	
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
-		Set<GrantedAuthority> grantedAuthority= new HashSet<>();
-		for(Role role : getRoles()) {
-			grantedAuthority.add(new SimpleGrantedAuthority("ROLE_"+role.getRole()));
+		Set<GrantedAuthority> grantedAuthority = new HashSet<>();
+		for (Role role : getRoles()) {
+			grantedAuthority.add(new SimpleGrantedAuthority("ROLE_" + role.getRole()));
 		}
 		return grantedAuthority;
 	}
@@ -58,5 +58,5 @@ public class CustomUserDetail extends User implements UserDetails{
 		// TODO Auto-generated method stub
 		return true;
 	}
-	
+
 }

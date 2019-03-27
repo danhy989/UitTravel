@@ -13,18 +13,18 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name="image")
+@Table(name = "image")
 public class Image {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="ID_IMAGES")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID_IMAGES")
 	private Integer id;
-	
-	@Column(name="URL")
+
+	@Column(name = "URL")
 	private String url;
-	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="ID_TOUR_INFO")
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ID_TOUR_INFO")
 	@JsonIgnore
 	private TourInformation tourInfo;
 
@@ -66,6 +66,5 @@ public class Image {
 	public String toString() {
 		return "Image [id=" + id + ", url=" + url + ", tourInfo=" + tourInfo + "]";
 	}
-	
-	
+
 }

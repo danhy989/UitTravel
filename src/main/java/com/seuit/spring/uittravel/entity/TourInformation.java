@@ -15,39 +15,35 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
-@Table(name="tour_information")
+@Table(name = "tour_information")
 public class TourInformation {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="ID_TOUR_INFO")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID_TOUR_INFO")
 	private Integer id;
-	
-	@Column(name="TITLE")
+
+	@Column(name = "TITLE")
 	private String title;
-	
-	@Column(name="DETAIL")
+
+	@Column(name = "DETAIL")
 	private String detail;
-	
-	
-	@Column(name="PRICE")
+
+	@Column(name = "PRICE")
 	private Double price;
-	
-	@Column(name="STATUS")
+
+	@Column(name = "STATUS")
 	private Integer status;
-	
-	@OneToOne(mappedBy="tourInfor",cascade=CascadeType.ALL)
+
+	@OneToOne(mappedBy = "tourInfor", cascade = CascadeType.ALL)
 	private Tour tour;
-	
+
 	@ManyToOne
-	@JoinColumn(name="ID_PROVINCE")
+	@JoinColumn(name = "ID_PROVINCE")
 	private Province province;
-	
-	@OneToMany(mappedBy="tourInfo",cascade=CascadeType.ALL)
+
+	@OneToMany(mappedBy = "tourInfo", cascade = CascadeType.ALL)
 	private Set<Image> images = new HashSet<Image>();
-	
 
 	public Integer getId() {
 		return id;
@@ -56,8 +52,6 @@ public class TourInformation {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
-	
 
 	public String getTitle() {
 		return title;
@@ -74,7 +68,6 @@ public class TourInformation {
 	public void setDetail(String detail) {
 		this.detail = detail;
 	}
-
 
 	public Double getPrice() {
 		return price;
@@ -107,8 +100,6 @@ public class TourInformation {
 	public void setProvince(Province province) {
 		this.province = province;
 	}
-	
-	
 
 	public Set<Image> getImages() {
 		return images;
@@ -118,7 +109,6 @@ public class TourInformation {
 		this.images = images;
 	}
 
-	
 	public TourInformation(String title, String detail, Double price, Integer status) {
 		super();
 		this.title = title;
@@ -127,7 +117,7 @@ public class TourInformation {
 		this.status = status;
 	}
 
-	public TourInformation(Integer id, String title, String detail, Double price, Integer status ) {
+	public TourInformation(Integer id, String title, String detail, Double price, Integer status) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -143,10 +133,8 @@ public class TourInformation {
 
 	@Override
 	public String toString() {
-		return "TourInformation [id=" + id + ", detail=" + detail + ", price=" + price
-				+ ", status=" + status + ", tour=" + tour + ", province=" + province + "]";
+		return "TourInformation [id=" + id + ", detail=" + detail + ", price=" + price + ", status=" + status
+				+ ", tour=" + tour + ", province=" + province + "]";
 	}
-	
-	
-	
+
 }

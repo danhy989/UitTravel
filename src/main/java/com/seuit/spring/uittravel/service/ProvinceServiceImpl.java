@@ -23,7 +23,7 @@ public class ProvinceServiceImpl implements ProvinceService {
 	public Province getProvinceById(Integer id) throws NotFoundException {
 		// TODO Auto-generated method stub
 		Optional<Province> province =  provinceRepository.findById(id);
-		province.orElseThrow(()-> new NotFoundException("Cant find Province"));
+		province.orElseThrow(() -> new NotFoundException("Cant find Province"));
 		return province.get();
 	}
 
