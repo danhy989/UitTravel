@@ -297,3 +297,10 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2019-03-27 18:45:09
+
+-- Update tour names - lowercase all of them
+UPDATE tour SET name = N'Sapa - Hà Nội - Hạ Long' WHERE id_tour = 1;
+UPDATE tour SET name = N'Hạ Long - Ninh Bình - Hà Nội' WHERE id_tour = 2;
+UPDATE tour SET name = N'Sapa - Hà Nội - Hạ Long' WHERE id_tour = 3;
+UPDATE tour SET name = N'Đà Lạt' WHERE id_tour = 5;
+UPDATE tour SET name = N'Vĩnh Hy - Ninh Chữ' WHERE id_tour = 6;
