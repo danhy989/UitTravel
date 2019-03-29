@@ -1,0 +1,19 @@
+{
+    "region": "north",
+    "data": [{
+            "id": 124,
+            "top_item_title": "Sapa",
+            "top_item_image": "images/vn/sapa.jpg"
+        },
+        {
+            "id": 253,
+            "top_item_title": "Hà Nội",
+            "top_item_image": "images/vn/ha-noi.jpg"
+        },
+        {
+            "id": 386,
+            "top_item_title": "Vịnh Hạ Long",
+            "top_item_image": "images/vn/ha-long.jpg"
+        }
+    ]
+}
