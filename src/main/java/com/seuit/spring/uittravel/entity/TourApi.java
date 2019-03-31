@@ -1,6 +1,6 @@
 package com.seuit.spring.uittravel.entity;
 
-public class TourAreaApi {
+public class TourApi {
 	private Integer id;
 	private String name;
 	private String image;
@@ -29,14 +29,14 @@ public class TourAreaApi {
 	public void setPrice(Double price) {
 		this.price = price;
 	}
-	public TourAreaApi(Integer id, String name, String image, Double price) {
+	public TourApi(Integer id, String name, String image, Double price) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.image = image;
 		this.price = price;
 	}
-	public TourAreaApi() {
+	public TourApi() {
 		super();
 		// TODO Auto-generated constructor stub
 	}

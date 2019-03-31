@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.seuit.spring.uittravel.entity.Area;
 import com.seuit.spring.uittravel.entity.Tour;
-import com.seuit.spring.uittravel.entity.TourAreaApi;
+import com.seuit.spring.uittravel.entity.TourApi;
 import com.seuit.spring.uittravel.entity.TourFull;
 import com.seuit.spring.uittravel.entity.TourInformation;
 
@@ -26,7 +26,7 @@ public interface TourService {
 
 	Tour findTourById(Integer Id) throws NotFoundException;
 
-	List<TourAreaApi> getAllTourByAreaId(Integer Id);
+	List<TourApi> getAllTourByAreaId(Integer Id);
 	
 	@SuppressWarnings("rawtypes")
 	Map getAllTourWithArea() throws NotFoundException;

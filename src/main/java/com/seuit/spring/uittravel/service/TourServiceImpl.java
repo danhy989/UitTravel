@@ -18,7 +18,7 @@ import com.seuit.spring.uittravel.entity.Area;
 import com.seuit.spring.uittravel.entity.Image;
 import com.seuit.spring.uittravel.entity.Province;
 import com.seuit.spring.uittravel.entity.Tour;
-import com.seuit.spring.uittravel.entity.TourAreaApi;
+import com.seuit.spring.uittravel.entity.TourApi;
 import com.seuit.spring.uittravel.entity.TourFull;
 import com.seuit.spring.uittravel.entity.TourInformation;
 import com.seuit.spring.uittravel.repository.AreaRepository;
@@ -180,10 +180,10 @@ public class TourServiceImpl implements TourService {
 	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
-	public List<TourAreaApi> getAllTourByAreaId(Integer Id) {
+	public List<TourApi> getAllTourByAreaId(Integer Id) {
 		// TODO Auto-generated method stub
 		EntityManager entity = entityManagerFactory.createEntityManager();
-		String sql = "select new com.seuit.spring.uittravel.entity.TourAreaApi(t.id,t.name,t.image,tif.price) " + "from Area a " + "inner join Province p on a.id=p.area "
+		String sql = "select new com.seuit.spring.uittravel.entity.TourApi(t.id,t.name,t.image,tif.price) " + "from Area a " + "inner join Province p on a.id=p.area "
 				+ "inner join TourInformation tif on p.id=tif.province " + "inner join Tour t on t.tourInfor=tif.id "
 				+ "where a.id=:areaId ORDER BY rand()";
 		javax.persistence.Query query = entity.createQuery(sql).setMaxResults(3);
@@ -239,7 +239,7 @@ public class TourServiceImpl implements TourService {
 	public List<Tour> getTopTourOrder() {
 		// TODO Auto-generated method stub
 		EntityManager entity = entityManagerFactory.createEntityManager();
-		String sql = "select t,tif.price,count(o.tour) " + "from Order o " + "inner join Tour t on t.id=o.tour.id "
+		String sql = "select new com.seuit.spring.uittravel.entity.TourApi(t.id,t.name,t.image,tif.price) " + "from Order o " + "inner join Tour t on t.id=o.tour.id "
 				+ "inner join TourInformation tif on tif.id=t.tourInfor " + "group by o.tour "
 				+ "order by count(o.tour) desc";
 		javax.persistence.Query query = entity.createQuery(sql).setMaxResults(8);
