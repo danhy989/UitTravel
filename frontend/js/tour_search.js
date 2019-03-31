@@ -17,7 +17,8 @@ document.addEventListener('DOMContentLoaded', function () {
     function goToSearchResults() {
         var keyword = searchInput.value.trim();
         if (isValid(keyword)) {
-            var url = "search_results.html?q=" + encodeURI(keyword);
+            var queryString = "?q=" + encodeURI(keyword);
+            var url = "search_results.html" + queryString;
             window.location.href = url;
         } else {
             alert('Vui lòng nhập từ khóa hợp lệ!');
@@ -26,7 +27,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function isValid(keyword) {
         if (keyword.replace(/\s/g, "") === "") return false;
-        if (keyword.includes("?") || keyword.includes("=")) return false;
+
+        if (keyword.includes("?") ||
+            keyword.includes("=") ||
+            keyword.includes("!") ||
+            keyword.includes("@") ||
+            keyword.includes("#") ||
+            keyword.includes("+") ||
+            keyword.includes("&") ||
+            keyword.includes("/") ||
+            keyword.includes("%"))
+            return false;
+
         return true;
     }
 });

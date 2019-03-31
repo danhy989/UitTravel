@@ -9,7 +9,7 @@ $(document).ready(function () {
     var indicator = $('#indicator');
     var listImage = $('#list-image');
 
-    var id = getTourIdByUrl(window.location.href, "?id=");
+    var id = getId();
     if (id == -1) return;
 
     $.ajax({
@@ -45,11 +45,11 @@ $(document).ready(function () {
             console.log("error loading image");
         });
 
-    function getTourIdByUrl(url, leadingText) {
-        var idPosition = url.indexOf(leadingText);
-        if (idPosition > -1) {
-            var id = url.substring(idPosition + leadingText.length);
-            return Number(id);
+    function getId() {
+        var queryString = window.location.search;
+        if (queryString !== "") {
+            var searchParams = new URLSearchParams(queryString);
+            return Number(searchParams.get('id'));
         }
         return -1;
     }

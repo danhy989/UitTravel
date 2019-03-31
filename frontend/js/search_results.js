@@ -4,9 +4,9 @@
 
 document.addEventListener('DOMContentLoaded', function () { // manipulate DOM elements after page has loaded completely
     // get the search keyword from the URL of the page
-    var keyword = getKeywordByUrl(window.location.href, "?q=");
+    var keyword = getKeyword();
     // stop searching if keyword equals null
-    if (keyword == null) return;    
+    if (keyword == null) return;
     // create and send an HTTP request
     var request = new XMLHttpRequest();
     request.open('GET', 'http://localhost:8080/rest/tour/search/' + encodeURI(keyword), true);
@@ -40,11 +40,11 @@ document.addEventListener('DOMContentLoaded', function () { // manipulate DOM el
     // set the title of the search results section on the page
     document.getElementById('section_title-with-q').innerText = `Kết quả tìm kiếm cho '${keyword}'`;
 
-    function getKeywordByUrl(url, leadingText) {
-        var qPosition = url.indexOf(leadingText);
-        if (qPosition > -1) {
-            var encodedKeyword = url.substring(qPosition + leadingText.length);
-            return decodeURI(encodedKeyword);
+    function getKeyword() {
+        var queryString = window.location.search;
+        if (queryString !== "") {
+            var searchParams = new URLSearchParams(queryString);
+            return searchParams.get('q');
         }
         return null;
     }
