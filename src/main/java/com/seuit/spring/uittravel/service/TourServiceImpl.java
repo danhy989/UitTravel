@@ -246,5 +246,20 @@ public class TourServiceImpl implements TourService {
 		return query.getResultList();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	@Transactional
+	public List<Tour> getTourByKeyword(String keyword) {
+		EntityManager entity = entityManagerFactory.createEntityManager();
+		String sql = "select new com.seuit.spring.uittravel.entity.TourApi(t.id,t.name,t.image,tif.price,tif.detail)"
+				+ " from Tour t inner join TourInformation tif on tif.id=t.tourInfor"
+				+ " where t.name like :code";
+		javax.persistence.Query query = entity.createQuery(sql).setMaxResults(10);
+		query.setParameter("code", "%"+keyword+"%");
+		return query.getResultList();
+	}
+
+	
+	
 	
 }

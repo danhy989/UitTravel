@@ -65,5 +65,10 @@ public class HomeRestController {
 	public ResponseEntity<List<Tour>> showTourTopOrder() {
 		return ResponseEntity.ok().body(tourService.getTopTourOrder());
 	}
-
+	
+	@GetMapping("/tour/search/{keyword}")
+	public ResponseEntity<List<Tour>> showListSearchTourByKeyword(@PathVariable(name = "keyword") String keyword) {
+		List<Tour> listTour = tourService.getTourByKeyword(keyword);
+		return ResponseEntity.ok().body(listTour);
+	}
 }

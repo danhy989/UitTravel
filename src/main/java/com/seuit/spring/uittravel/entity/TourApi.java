@@ -5,6 +5,16 @@ public class TourApi {
 	private String name;
 	private String image;
 	private Double price;
+	private String detail;
+	
+	
+	
+	public String getDetail() {
+		return detail;
+	}
+	public void setDetail(String detail) {
+		this.detail = detail;
+	}
 	public Integer getId() {
 		return id;
 	}
@@ -35,6 +45,16 @@ public class TourApi {
 		this.name = name;
 		this.image = image;
 		this.price = price;
+	}
+	
+	
+	public TourApi(Integer id, String name, String image, Double price, String detail) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.image = image;
+		this.price = price;
+		this.detail = detail;
 	}
 	public TourApi() {
 		super();

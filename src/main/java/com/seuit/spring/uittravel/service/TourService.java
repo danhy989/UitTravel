@@ -35,4 +35,6 @@ public interface TourService {
 
 	List<Tour> getTopTourOrder();
 	
+	List<Tour> getTourByKeyword(String keyword);
+	
 }
