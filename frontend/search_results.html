@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Tìm kiếm</title>
+    <title>UIT Travel - Tìm kiếm</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Destino project">
@@ -46,7 +46,7 @@
                             <div class="search">
                                 <form action="#" class="search_form">
                                     <input type="search" name="search_input" class="search_input ctrl_class" required="required" placeholder="Từ khóa">
-                                    <button type="submit" class="search_button ml-auto ctrl_class"><img src="images/search.png" alt=""></button>
+                                    <div class="search_button ml-auto ctrl_class"><img src="images/search.png" alt=""></div>
                                 </form>
                             </div>
 
@@ -98,7 +98,6 @@
         <!-- Home -->
 
         <div class="home">
-            <!-- Image by https://unsplash.com/@peecho -->
             <div class="home_background parallax-window" data-parallax="scroll" data-image-src="images/offers.jpg" data-speed="0.8"></div>
             <div class="container">
                 <div class="row">
@@ -106,12 +105,7 @@
                         <div class="home_content">
                             <div class="home_content_inner">
                                 <div class="home_title">Tìm kiếm</div>
-                                <div class="home_breadcrumbs">
-                                    <ul class="home_breadcrumbs_list">
-                                        <li class="home_breadcrumb"><a href="index.html">Trang chủ</a></li>
-                                        <li class="home_breadcrumb">Tìm kiếm</li>
-                                    </ul>
-                                </div>
+                                <div class="home_title_small">Tìm kiếm tour du lịch trong mơ của bạn</div>
                             </div>
                         </div>
                     </div>
@@ -126,7 +120,7 @@
                 <div class="row">
                     <div class="col">
                         <div class="section_title text-center">
-                            <h2>Kết quả tìm kiếm</h2>
+                            <h2 id="section_title-with-q">&nbsp;</h2>
                         </div>
                     </div>
                 </div>
@@ -198,113 +192,7 @@
                     <div class="col">
                         <div class="items item_grid clearfix">
 
-                            <!-- Item -->
-                            <div class="item clearfix rating_5">
-                                <div class="item_image"><img src="images/top_1.jpg" alt=""></div>
-                                <div class="item_content">
-                                    <div class="item_title">Paris, France</div>
-                                    <div class="item_price">From $890</div>
-                                    <ul>
-                                        <li>1 person</li>
-                                        <li>4 nights</li>
-                                        <li>3 star hotel</li>
-                                    </ul>
-                                    <div class="rating rating_5" data-rating="5">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <div class="item_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                        Fusce fringilla lectus nec diam auctor, ut fringilla diam sagittis. Quisque vel
-                                        est id justo faucibus dapibus id a nibh. Aenean suscipit consequat lacus, sit
-                                        amet mollis nulla. Morbi sagittis orci id lacus convallis tempus eget sit amet
-                                        metus.</div>
-                                    <div class="item_more_link"><a href="#">Read More</a></div>
-                                </div>
-                            </div>
-
-                            <!-- Item -->
-                            <div class="item clearfix rating_3">
-                                <div class="item_image"><img src="images/top_2.jpg" alt=""></div>
-                                <div class="item_content">
-                                    <div class="item_title">Cinque Terre</div>
-                                    <div class="item_price">From $290</div>
-                                    <ul>
-                                        <li>1 person</li>
-                                        <li>4 nights</li>
-                                        <li>3 star hotel</li>
-                                    </ul>
-                                    <div class="rating rating_3" data-rating="3">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <div class="item_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                        Fusce fringilla lectus nec diam auctor, ut fringilla diam sagittis. Quisque vel
-                                        est id justo faucibus dapibus id a nibh. Aenean suscipit consequat lacus, sit
-                                        amet mollis nulla. Morbi sagittis orci id lacus convallis tempus eget sit amet
-                                        metus.</div>
-                                    <div class="item_more_link"><a href="#">Read More</a></div>
-                                </div>
-                            </div>
-
-                            <!-- Item -->
-                            <div class="item clearfix rating_4">
-                                <div class="item_image"><img src="images/top_3.jpg" alt=""></div>
-                                <div class="item_content">
-                                    <div class="item_title">Italian Riviera</div>
-                                    <div class="item_price">From $590</div>
-                                    <ul>
-                                        <li>1 person</li>
-                                        <li>4 nights</li>
-                                        <li>3 star hotel</li>
-                                    </ul>
-                                    <div class="rating rating_4" data-rating="4">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <div class="item_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                        Fusce fringilla lectus nec diam auctor, ut fringilla diam sagittis. Quisque vel
-                                        est id justo faucibus dapibus id a nibh. Aenean suscipit consequat lacus, sit
-                                        amet mollis nulla. Morbi sagittis orci id lacus convallis tempus eget sit amet
-                                        metus.</div>
-                                    <div class="item_more_link"><a href="#">Read More</a></div>
-                                </div>
-                            </div>
-
-                            <!-- Item -->
-                            <div class="item clearfix rating_5">
-                                <div class="item_image"><img src="images/top_4.jpg" alt=""></div>
-                                <div class="item_content">
-                                    <div class="item_title">Santorini, Greece</div>
-                                    <div class="item_price">From $490</div>
-                                    <ul>
-                                        <li>1 person</li>
-                                        <li>4 nights</li>
-                                        <li>3 star hotel</li>
-                                    </ul>
-                                    <div class="rating rating_5" data-rating="5">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <div class="item_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                        Fusce fringilla lectus nec diam auctor, ut fringilla diam sagittis. Quisque vel
-                                        est id justo faucibus dapibus id a nibh. Aenean suscipit consequat lacus, sit
-                                        amet mollis nulla. Morbi sagittis orci id lacus convallis tempus eget sit amet
-                                        metus.</div>
-                                    <div class="item_more_link"><a href="#">Read More</a></div>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>                
@@ -428,8 +316,9 @@
     <script src="plugins/Isotope/isotope.pkgd.min.js"></script>
     <script src="plugins/easing/easing.js"></script>
     <script src="plugins/parallax-js-master/parallax.min.js"></script>
-    <script src="js/offers_custom.js"></script>
-    <script src="js/get_data_results.js"></script>
+    <script src="js/search_results_custom.js"></script>
+    <script src="js/tour_search.js"></script>
+    <script src="js/search_results.js"></script>
 </body>
 
 </html>
