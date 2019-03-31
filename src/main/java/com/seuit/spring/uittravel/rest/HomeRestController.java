@@ -1,6 +1,8 @@
 package com.seuit.spring.uittravel.rest;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,11 +30,11 @@ public class HomeRestController {
 		return ResponseEntity.ok().body(tours);
 	}
 
-	@GetMapping("/tour/{idTourInfo}")
-	public ResponseEntity<TourInformation> showTourInfor(@PathVariable(name = "idTourInfo") Integer idTourInfo) {
+	@GetMapping("/tour/{idTour}")
+	public ResponseEntity<Object> showTourInfor(@PathVariable(name = "idTour") Integer idTour) {
 		TourInformation tourInfo = new TourInformation();
 		try {
-			tourInfo = tourService.findTourInforById(idTourInfo);
+			tourInfo = tourService.findTourInforByTourId(idTour);
 		} catch (NotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -40,10 +42,17 @@ public class HomeRestController {
 		return ResponseEntity.ok().body(tourInfo);
 	}
 
-	@GetMapping("/tour/area/{areaId}")
-	public ResponseEntity<List<Tour>> showTourWithArea(@PathVariable(name = "areaId") Integer areaId) {
-		List<Tour> listTour = tourService.getAllTourByAreaId(areaId);
-		return ResponseEntity.ok().body(listTour);
+	@SuppressWarnings("rawtypes")
+	@GetMapping("/tour/area")
+	public ResponseEntity<Map> showTourWithArea() {
+		Map mapTour = null;
+		try {
+			mapTour = tourService.getAllTourWithArea();
+		} catch (NotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ResponseEntity.ok().body(mapTour);
 	}
 
 	@GetMapping("/tour/province/{provinceId}")

@@ -1,8 +1,10 @@
 package com.seuit.spring.uittravel.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
@@ -12,11 +14,14 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.seuit.spring.uittravel.entity.Area;
 import com.seuit.spring.uittravel.entity.Image;
 import com.seuit.spring.uittravel.entity.Province;
 import com.seuit.spring.uittravel.entity.Tour;
+import com.seuit.spring.uittravel.entity.TourAreaApi;
 import com.seuit.spring.uittravel.entity.TourFull;
 import com.seuit.spring.uittravel.entity.TourInformation;
+import com.seuit.spring.uittravel.repository.AreaRepository;
 import com.seuit.spring.uittravel.repository.ProvinceRepository;
 import com.seuit.spring.uittravel.repository.TourInforRepository;
 import com.seuit.spring.uittravel.repository.TourRepository;
@@ -37,6 +42,9 @@ public class TourServiceImpl implements TourService {
 
 	@Autowired
 	private ProvinceRepository provinceRepository;
+	
+	@Autowired 
+	private AreaRepository areaRepository;
 
 	@Override
 	@Transactional
@@ -152,11 +160,12 @@ public class TourServiceImpl implements TourService {
 
 	@Override
 	@Transactional
-	public TourInformation findTourInforById(Integer Id) throws NotFoundException {
+	public TourInformation findTourInforByTourId(Integer Id) throws NotFoundException {
 		// TODO Auto-generated method stub
-		Optional<TourInformation> tourInfo = tourInforRepository.findById(Id);
-		tourInfo.orElseThrow(() -> new NotFoundException("Cant find tourInfo"));
-		return tourInfo.get();
+		Optional<Tour> tour = tourRepository.findById(Id);
+		tour.orElseThrow(() -> new NotFoundException("Cant find tour"));
+		TourInformation tourInfor = tour.get().getTourInfor();
+		return tourInfor;
 	}
 
 	@Override
@@ -171,15 +180,44 @@ public class TourServiceImpl implements TourService {
 	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
-	public List<Tour> getAllTourByAreaId(Integer Id) {
+	public List<TourAreaApi> getAllTourByAreaId(Integer Id) {
 		// TODO Auto-generated method stub
 		EntityManager entity = entityManagerFactory.createEntityManager();
-		String sql = "select t,tif.price " + "from Area a " + "inner join Province p on a.id=p.area "
+		String sql = "select new com.seuit.spring.uittravel.entity.TourAreaApi(t.id,t.name,t.image,tif.price) " + "from Area a " + "inner join Province p on a.id=p.area "
 				+ "inner join TourInformation tif on p.id=tif.province " + "inner join Tour t on t.tourInfor=tif.id "
 				+ "where a.id=:areaId ORDER BY rand()";
 		javax.persistence.Query query = entity.createQuery(sql).setMaxResults(3);
 		query.setParameter("areaId", Id);
 		return query.getResultList();
+	}
+	
+	
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@Override
+	@Transactional
+	public Map getAllTourWithArea() throws NotFoundException {
+		HashMap mMap = new HashMap();
+		for(int i=1;i<=3;i++) {
+			String areaNameENG = ""; 
+			Optional<Area> area = areaRepository.findById(i);
+			area.orElseThrow(()-> new NotFoundException("cant find area"));
+			switch (area.get().getName()) {
+			case "Miền nam":
+				areaNameENG="south";
+				break;
+			case "Miền trung":
+				areaNameENG="central";
+				break;
+			case "Miền bắc":
+				areaNameENG="north";
+				break;
+			default:
+				break;
+			}
+			mMap.put(areaNameENG, getAllTourByAreaId(i));
+		}
+		return mMap;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -208,4 +246,5 @@ public class TourServiceImpl implements TourService {
 		return query.getResultList();
 	}
 
+	
 }
