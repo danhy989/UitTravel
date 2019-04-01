@@ -2,9 +2,7 @@
 /* Get data for homepage from back-end APIs */
 /************************************************/
 
-document.addEventListener('DOMContentLoaded', function () {
-    // manipulate DOM elements only after the page has loaded completely
-
+document.addEventListener('DOMContentLoaded', function () { // manipulate DOM elements only after the page has loaded completely
     // declare HTTP requests and get the necessary DOM elements
     var reqToursByRegion, reqPopularTours;
     var topItems = document.getElementsByClassName('top_item');
@@ -17,9 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
     reqToursByRegion.open('GET', 'http://localhost:8080/rest/tour/area', true);
     reqToursByRegion.send();
     reqToursByRegion.onload = function () {
-        const jsonObject = JSON.parse(this.responseText);
-        console.log(jsonObject);
-
+        const jsonObject = JSON.parse(this.responseText);        
         // Display tours from the North, Central and South
         displayRegionalTours(jsonObject.north, northSlots);
         displayRegionalTours(jsonObject.central, centralSlots);
@@ -32,12 +28,10 @@ document.addEventListener('DOMContentLoaded', function () {
     reqPopularTours.send();
     reqPopularTours.onload = function () {
         const jsonObject = JSON.parse(this.responseText);
-        console.log(jsonObject);
-
         for (let i = 0; i < jsonObject.length; i++) {
             const tour = jsonObject[i];
             const html = `
-            <a href="#">
+            <a href="doc.html?id=${tour.id}">
                 <div class="popular_item_image"><img src="${tour.image}" alt=""></div>
                 <div class="popular_item_content">
                     <div class="popular_item_title">${tour.name}</div>
@@ -55,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
         for (let i = 0; i < regionalTours.length; i++) {
             const tour = regionalTours[i];
             const html = `
-            <a href="#">
+            <a href="TourInformation?id=${tour.id}">
                 <div class="top_item_image"><img src="${tour.image}" alt=""></div>
                 <div class="top_item_content">
                     <div class="top_item_title">${tour.name}</div>

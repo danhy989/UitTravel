@@ -3,6 +3,7 @@ package com.seuit.spring.uittravel.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class HomeController {
@@ -26,5 +27,10 @@ public class HomeController {
 	@PostMapping("/loading")
 	public String showLoading() {
 		return "loading";
+	}
+	
+	@GetMapping("/TourInformation")
+	public String showTourInfor(@RequestParam Integer id) {
+		return "doc";
 	}
 }
