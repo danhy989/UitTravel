@@ -30,7 +30,17 @@ public class HomeController {
 	}
 	
 	@GetMapping("/TourInformation")
-	public String showTourInfor(@RequestParam Integer id) {
+	public String showTourInforPage() {
 		return "doc";
+	}
+	
+	@GetMapping("/contact.html")
+	public String showContactPage() {
+		return "contact";
+	}
+	
+	@GetMapping("/search")
+	public String showSearchPage() {
+		return "search_results";
 	}
 }

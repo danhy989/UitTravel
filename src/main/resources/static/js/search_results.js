@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () { // manipulate DOM el
                         <i class="fa fa-star"></i>
                     </div>
                     <div class="item_text">${tour.detail}</div>
-                    <div class="item_more_link"><a href="doc.html?id=${tour.id}">Xem thêm</a></div>
+                    <div class="item_more_link"><a href="TourInformation?id=${tour.id}">Xem thêm</a></div>
                 </div>
             </div>
             `;

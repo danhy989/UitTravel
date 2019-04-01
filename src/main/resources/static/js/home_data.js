@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () { // manipulate DOM el
         for (let i = 0; i < jsonObject.length; i++) {
             const tour = jsonObject[i];
             const html = `
-            <a href="doc.html?id=${tour.id}">
+            <a href="TourInformation?id=${tour.id}">
                 <div class="popular_item_image"><img src="${tour.image}" alt=""></div>
                 <div class="popular_item_content">
                     <div class="popular_item_title">${tour.name}</div>

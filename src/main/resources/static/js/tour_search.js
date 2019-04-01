@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var keyword = searchInput.value.trim();
         if (isValid(keyword)) {
             var queryString = "?q=" + encodeURI(keyword);
-            var url = "search_results.html" + queryString;
+            var url = "search" + queryString;
             window.location.href = url;
         } else {
             alert('Vui lòng nhập từ khóa hợp lệ!');
