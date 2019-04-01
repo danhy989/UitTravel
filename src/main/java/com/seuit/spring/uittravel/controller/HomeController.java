@@ -29,12 +29,12 @@ public class HomeController {
 		return "loading";
 	}
 	
-	@GetMapping("/TourInformation")
+	@GetMapping("/tour-info")
 	public String showTourInforPage() {
 		return "doc";
 	}
 	
-	@GetMapping("/contact.html")
+	@GetMapping("/contact")
 	public String showContactPage() {
 		return "contact";
 	}

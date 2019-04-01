@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () { // manipulate DOM el
     if (keyword == null) return;
     // create and send an HTTP request
     var request = new XMLHttpRequest();
-    request.open('GET', 'http://localhost:8080/rest/tour/search/' + encodeURI(keyword), true);
+    request.open('GET', '/rest/tour/search/' + encodeURI(keyword), true);
     request.send();
     request.onload = function () {
         var jsonObject = JSON.parse(this.responseText);
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () { // manipulate DOM el
                         <i class="fa fa-star"></i>
                     </div>
                     <div class="item_text">${tour.detail}</div>
-                    <div class="item_more_link"><a href="TourInformation?id=${tour.id}">Xem thêm</a></div>
+                    <div class="item_more_link"><a href="tour-info?id=${tour.id}">Xem thêm</a></div>
                 </div>
             </div>
             `;

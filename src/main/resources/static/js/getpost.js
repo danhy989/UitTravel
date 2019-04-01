@@ -14,7 +14,7 @@ $(document).ready(function () {
 
     $.ajax({
         type: 'GET',
-        url: 'http://localhost:8080/rest/tour/' + id,
+        url: '/rest/tour/' + id,
         success: function (item) {
             header.text(item.tour.name);
             tourName.text(item.tour.name);
@@ -25,7 +25,7 @@ $(document).ready(function () {
         }
     });
 
-    $.getJSON("http://localhost:8080/rest/tour/" + id, function (jsons) {
+    $.getJSON("/rest/tour/" + id, function (jsons) {
         for (i = 0; i < jsons.images.length; i++) {
             if (i == 0) {
                 indicator.append("<li" + " " + "data-target=#carousel-example-2" + " " + "data-slide-to=" + i + " class=" + "\"active\"></li>");
