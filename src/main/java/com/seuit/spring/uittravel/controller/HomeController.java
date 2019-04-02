@@ -5,9 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.seuit.spring.uittravel.entity.Comment;
 import com.seuit.spring.uittravel.service.TourService;
@@ -56,14 +53,13 @@ public class HomeController {
 	}
 
 	@PostMapping("/addComment")
-	public String saveComment(@ModelAttribute(name="cmt") Comment cmt) {
+	public void saveComment(@ModelAttribute(name="cmt") Comment cmt) {
 		try {
 			tourService.addComment(cmt, 1);
 		} catch (NotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "doc";
 	}
 	@GetMapping("/testAddComment")
 	public String testAddComment() {
