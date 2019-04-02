@@ -38,13 +38,18 @@ public class HomeController {
 	}
 
 	@GetMapping("/tour-info")
-	public String showTourInforPage() {
+	public String showTourInfoPage() {
 		return "doc";
 	}
 
 	@GetMapping("/contact")
 	public String showContactPage() {
 		return "contact";
+	}
+	
+	@GetMapping("/about")
+	public String showAboutPage() {
+		return "about";
 	}
 
 	@GetMapping("/search")
