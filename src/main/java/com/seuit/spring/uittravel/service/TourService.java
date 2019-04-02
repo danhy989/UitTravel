@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.seuit.spring.uittravel.entity.Area;
+import com.seuit.spring.uittravel.entity.Comment;
 import com.seuit.spring.uittravel.entity.Tour;
 import com.seuit.spring.uittravel.entity.TourApi;
 import com.seuit.spring.uittravel.entity.TourFull;
@@ -36,5 +37,7 @@ public interface TourService {
 	List<Tour> getTopTourOrder();
 	
 	List<Tour> getTourByKeyword(String keyword);
+	
+	void addComment(Comment cmt,Integer idTourInfor) throws NotFoundException;
 	
 }

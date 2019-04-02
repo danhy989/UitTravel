@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.seuit.spring.uittravel.entity.Area;
+import com.seuit.spring.uittravel.entity.Comment;
 import com.seuit.spring.uittravel.entity.Image;
 import com.seuit.spring.uittravel.entity.Province;
 import com.seuit.spring.uittravel.entity.Tour;
@@ -22,6 +23,7 @@ import com.seuit.spring.uittravel.entity.TourApi;
 import com.seuit.spring.uittravel.entity.TourFull;
 import com.seuit.spring.uittravel.entity.TourInformation;
 import com.seuit.spring.uittravel.repository.AreaRepository;
+import com.seuit.spring.uittravel.repository.CommentRepository;
 import com.seuit.spring.uittravel.repository.ProvinceRepository;
 import com.seuit.spring.uittravel.repository.TourInforRepository;
 import com.seuit.spring.uittravel.repository.TourRepository;
@@ -42,9 +44,12 @@ public class TourServiceImpl implements TourService {
 
 	@Autowired
 	private ProvinceRepository provinceRepository;
-	
-	@Autowired 
+
+	@Autowired
 	private AreaRepository areaRepository;
+	
+	@Autowired
+	private CommentRepository commentRepository;
 
 	@Override
 	@Transactional
@@ -56,7 +61,7 @@ public class TourServiceImpl implements TourService {
 	@Override
 	@Transactional
 	public void addTour(TourFull tourFull) throws NotFoundException {
-		
+
 		tourFull.setStatus(1);
 		// init province
 		Optional<Province> province = provinceRepository.findById(tourFull.getProvince());
@@ -183,34 +188,33 @@ public class TourServiceImpl implements TourService {
 	public List<TourApi> getAllTourByAreaId(Integer Id) {
 		// TODO Auto-generated method stub
 		EntityManager entity = entityManagerFactory.createEntityManager();
-		String sql = "select new com.seuit.spring.uittravel.entity.TourApi(t.id,t.name,t.image,tif.price) " + "from Area a " + "inner join Province p on a.id=p.area "
+		String sql = "select new com.seuit.spring.uittravel.entity.TourApi(t.id,t.name,t.image,tif.price) "
+				+ "from Area a " + "inner join Province p on a.id=p.area "
 				+ "inner join TourInformation tif on p.id=tif.province " + "inner join Tour t on t.tourInfor=tif.id "
 				+ "where a.id=:areaId ORDER BY rand()";
 		javax.persistence.Query query = entity.createQuery(sql).setMaxResults(3);
 		query.setParameter("areaId", Id);
 		return query.getResultList();
 	}
-	
-	
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	@Transactional
 	public Map getAllTourWithArea() throws NotFoundException {
 		HashMap mMap = new HashMap();
-		for(int i=1;i<=3;i++) {
-			String areaNameENG = ""; 
+		for (int i = 1; i <= 3; i++) {
+			String areaNameENG = "";
 			Optional<Area> area = areaRepository.findById(i);
-			area.orElseThrow(()-> new NotFoundException("cant find area"));
+			area.orElseThrow(() -> new NotFoundException("cant find area"));
 			switch (area.get().getName()) {
 			case "Miền nam":
-				areaNameENG="south";
+				areaNameENG = "south";
 				break;
 			case "Miền trung":
-				areaNameENG="central";
+				areaNameENG = "central";
 				break;
 			case "Miền bắc":
-				areaNameENG="north";
+				areaNameENG = "north";
 				break;
 			default:
 				break;
@@ -239,7 +243,8 @@ public class TourServiceImpl implements TourService {
 	public List<Tour> getTopTourOrder() {
 		// TODO Auto-generated method stub
 		EntityManager entity = entityManagerFactory.createEntityManager();
-		String sql = "select new com.seuit.spring.uittravel.entity.TourApi(t.id,t.name,t.image,tif.price) " + "from Order o " + "inner join Tour t on t.id=o.tour.id "
+		String sql = "select new com.seuit.spring.uittravel.entity.TourApi(t.id,t.name,t.image,tif.price) "
+				+ "from Order o " + "inner join Tour t on t.id=o.tour.id "
 				+ "inner join TourInformation tif on tif.id=t.tourInfor " + "group by o.tour "
 				+ "order by count(o.tour) desc";
 		javax.persistence.Query query = entity.createQuery(sql).setMaxResults(8);
@@ -252,14 +257,19 @@ public class TourServiceImpl implements TourService {
 	public List<Tour> getTourByKeyword(String keyword) {
 		EntityManager entity = entityManagerFactory.createEntityManager();
 		String sql = "select new com.seuit.spring.uittravel.entity.TourApi(t.id,t.name,t.image,tif.price,tif.detail)"
-				+ " from Tour t inner join TourInformation tif on tif.id=t.tourInfor"
-				+ " where t.name like :code";
+				+ " from Tour t inner join TourInformation tif on tif.id=t.tourInfor" + " where t.name like :code";
 		javax.persistence.Query query = entity.createQuery(sql).setMaxResults(10);
-		query.setParameter("code", "%"+keyword+"%");
+		query.setParameter("code", "%" + keyword + "%");
 		return query.getResultList();
 	}
 
-	
-	
-	
+	@Override
+	@Transactional
+	public void addComment(Comment cmt, Integer idTourInfor) throws NotFoundException {
+		// TODO Auto-generated method stub
+		Optional<TourInformation> tourInfor = tourInforRepository.findById(idTourInfor);
+		tourInfor.orElseThrow(() -> new NotFoundException("Cant find tourInfo"));
+		cmt.setTourInfo(tourInfor.get());
+		commentRepository.save(cmt);
+	}
 }

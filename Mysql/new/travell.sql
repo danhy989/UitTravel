@@ -50,9 +50,11 @@ CREATE TABLE `comment` (
   `ID_CMT` int(10) NOT NULL AUTO_INCREMENT,
   `NAME` varchar(30) NOT NULL,
   `CONTENT` longtext,
-  `ID_TOUR_INFO` int(10) NOT NULL,
-  PRIMARY KEY (`ID_CMT`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `ID_TOUR_INFO` int(10) DEFAULT NULL,
+  PRIMARY KEY (`ID_CMT`),
+  KEY `FKsmpxp11rlpflqirn39iwchdji` (`ID_TOUR_INFO`),
+  CONSTRAINT `FKsmpxp11rlpflqirn39iwchdji` FOREIGN KEY (`ID_TOUR_INFO`) REFERENCES `tour_information` (`ID_TOUR_INFO`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -61,6 +63,7 @@ CREATE TABLE `comment` (
 
 LOCK TABLES `comment` WRITE;
 /*!40000 ALTER TABLE `comment` DISABLE KEYS */;
+INSERT INTO `comment` VALUES (9,'duyAnh','123456121',1);
 /*!40000 ALTER TABLE `comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -197,7 +200,7 @@ CREATE TABLE `tour` (
 
 LOCK TABLES `tour` WRITE;
 /*!40000 ALTER TABLE `tour` DISABLE KEYS */;
-INSERT INTO `tour` VALUES (1,'SA PA - HÀ NỘI - HẠ LONG','https://transviet.com.vn/Images/GallerySGN/MB002.05/chinh-phuc-dinh-fansipan.jpg',1),(2,'HẠ LONG - NINH BÌNH - HÀ NỘI','https://transviet.com.vn/Images/GallerySGN/MB001.04/vinhhalong-du-lich-mien-bac-transviet-1.jpg',2),(3,'SA PA - HÀ NỘI - HẠ LONG','https://transviet.com.vn/Images/GallerySGN/MB001.05/ho-hoan-kiem.jpg',3),(4,'Phan Thiết - Mũi Né','https://transviet.com.vn/Images/GallerySGN/PT001.02/doi-cat-bay.jpg',4),(5,'ĐÀ LẠT','https://transviet.com.vn/Images/GallerySGN/DL001.04/ga-da-lat.jpg',5),(6,'VĨNH HY - NINH CHỬ','https://transviet.com.vn/Images/GallerySGN/PR001.03/dao-binh-hung.jpg',6),(7,'Phú Quốc','https://transviet.com.vn/Images/GalleryHAN/PQ15.04/280ef947e00fb8b33471a2a169c7ffd9.jpg',11);
+INSERT INTO `tour` VALUES (1,'Sapa - Hà Nội - Hạ Long','https://transviet.com.vn/Images/GallerySGN/MB002.05/chinh-phuc-dinh-fansipan.jpg',1),(2,'Hạ Long - Ninh Bình - Hà Nội','https://transviet.com.vn/Images/GallerySGN/MB001.04/vinhhalong-du-lich-mien-bac-transviet-1.jpg',2),(3,'Sapa - Hà Nội - Hạ Long','https://transviet.com.vn/Images/GallerySGN/MB001.05/ho-hoan-kiem.jpg',3),(4,'Phan Thiết - Mũi Né','https://transviet.com.vn/Images/GallerySGN/PT001.02/doi-cat-bay.jpg',4),(5,'Đà Lạt','https://transviet.com.vn/Images/GallerySGN/DL001.04/ga-da-lat.jpg',5),(6,'Vĩnh Hy - Ninh Chữ','https://transviet.com.vn/Images/GallerySGN/PR001.03/dao-binh-hung.jpg',6),(7,'Phú Quốc','https://transviet.com.vn/Images/GalleryHAN/PQ15.04/280ef947e00fb8b33471a2a169c7ffd9.jpg',11);
 /*!40000 ALTER TABLE `tour` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -296,11 +299,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-03-27 18:45:09
-
--- Update tour names - lowercase all of them
-UPDATE tour SET name = N'Sapa - Hà Nội - Hạ Long' WHERE id_tour = 1;
-UPDATE tour SET name = N'Hạ Long - Ninh Bình - Hà Nội' WHERE id_tour = 2;
-UPDATE tour SET name = N'Sapa - Hà Nội - Hạ Long' WHERE id_tour = 3;
-UPDATE tour SET name = N'Đà Lạt' WHERE id_tour = 5;
-UPDATE tour SET name = N'Vĩnh Hy - Ninh Chữ' WHERE id_tour = 6;
+-- Dump completed on 2019-04-02 19:28:03

@@ -1,6 +1,8 @@
 package com.seuit.spring.uittravel.entity;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -44,6 +46,9 @@ public class TourInformation {
 
 	@OneToMany(mappedBy = "tourInfo", cascade = CascadeType.ALL)
 	private Set<Image> images = new HashSet<Image>();
+	
+	@OneToMany(mappedBy="tourInfo",cascade = CascadeType.ALL)
+	private List<Comment> comments = new ArrayList<Comment>();
 
 	public Integer getId() {
 		return id;
@@ -108,6 +113,20 @@ public class TourInformation {
 	public void setImages(Set<Image> images) {
 		this.images = images;
 	}
+	
+	
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+	
+	public void addComment (Comment comment) {
+		this.comments.add(comment);
+	}
 
 	public TourInformation(String title, String detail, Double price, Integer status) {
 		super();
@@ -133,8 +152,11 @@ public class TourInformation {
 
 	@Override
 	public String toString() {
-		return "TourInformation [id=" + id + ", detail=" + detail + ", price=" + price + ", status=" + status
-				+ ", tour=" + tour + ", province=" + province + "]";
+		return "TourInformation [id=" + id + ", title=" + title + ", detail=" + detail + ", price=" + price
+				+ ", status=" + status + ", tour=" + tour + ", province=" + province + ", images=" + images
+				+ ", comments=" + comments + "]";
 	}
+
+	
 
 }
