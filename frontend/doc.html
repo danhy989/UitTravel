@@ -12,6 +12,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
 		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
 	</script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
 	<link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" type="text/css" href="styles/about_styles.css">
@@ -207,7 +208,59 @@
 						necessitatibus, est!</p>
 
 					<hr>
+					<div class="modal fade" id="modalSubscriptionForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+					  aria-hidden="true">
+					  <div class="modal-dialog" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header text-center">
+					        <h4 class="modal-title w-100 font-weight-bold">Your Information</h4>
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;</span>
+					        </button>
+					      </div>
+					      <form action="http://foo.com" method="post">
+					      <div class="modal-body mx-3">
+					        <div class="md-form mb-5">
+					          <i class="fa fa-info-circle" aria-hidden="true"></i>
+					          <label data-error="wrong" data-success="right" for="form3">Your name</label>
+					          <input type="text" id="form2" name="name" class="form-control validate">
+					        </div>
 
+					        <div class="md-form mb-4">
+					          <i class="fa fa-phone-square" aria-hidden="true"></i>
+					          <label data-error="wrong" data-success="right" for="form2">Your Phone Number</label>
+					          <input type="Number" id="form2" name="phone" class="form-control validate">         
+					        </div>
+
+					        <div class="md-form mb-4">
+					          <i class="fa fa-address-book" aria-hidden="true"></i>
+					          <label data-error="wrong" data-success="right" for="form2">Your Address</label>
+					          <input type="text" id="form2" name="adress" class="form-control validate">          
+					        </div>
+
+					        <div class="md-form mb-4">
+					          <i class="fa fa-id-card-o" aria-hidden="true"></i>
+					          <label data-error="wrong" data-success="right" for="form2">Your Passenger</label>
+					          <input type="text" id="form2" name="passengers" class="form-control validate">         
+					        </div>
+
+					        <div class="md-form mb-4">
+					          <i class="fa fa-file-text" aria-hidden="true"></i>
+					          <label data-error="wrong" data-success="right" for="form2">Decription</label>
+					          <input type="text" id="form2" name="decription" class="form-control validate">       
+					        </div>
+					      </div>
+					      <div class="modal-footer d-flex justify-content-center">
+					        <button class="btn btn-success">Send <i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+
+<div class="text-center">
+  <a href="" class="btn btn-danger btn-rounded mb-4" data-toggle="modal" data-target="#modalSubscriptionForm">Book This Tour</a>
+</div>
+</form>
 					<!-- Comments Form -->
 					<div class="card my-4">
 						<h5 class="card-header">Leave a Comment:</h5>
