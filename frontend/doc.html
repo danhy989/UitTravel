@@ -218,7 +218,7 @@
 					          <span aria-hidden="true">&times;</span>
 					        </button>
 					      </div>
-					      <form action="http://foo.com" method="post">
+					      <form id="myForm" name="myForm" method="post">
 					      <div class="modal-body mx-3">
 					        <div class="md-form mb-5">
 					          <i class="fa fa-info-circle" aria-hidden="true"></i>
@@ -250,15 +250,10 @@
 					          <input type="text" id="form2" name="decription" class="form-control validate">       
 					        </div>
 
-					        <div hidden="true" class="md-form mb-4">
-					          <i class="fa fa-file-text" aria-hidden="true"></i>
-					          <label data-error="wrong" data-success="right" for="form2">id</label>
-					          <input type="text" id="order" name="id" class="form-control validate">       
-					        </div>
+					        
 					      </div>
 					      <div class="modal-footer d-flex justify-content-center">
-					        <button onclick="document.getElementById('order').value = document.getElementById('id').innerHTML"
-					        class="btn btn-success">Send <i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+					        <button onclick="summit()" class="btn btn-success">Send <i class="fa fa-paper-plane" aria-hidden="true"></i></button>
 					      </div>
 					    </div>
 					  </div>
@@ -425,7 +420,7 @@
 			</div>
 		</footer>
 	</div>
-
+	<script src="js/post.js"></script>
 	<script src="js/jquery-3.2.1.min.js"></script>
 	<script src="styles/bootstrap4/popper.js"></script>
 	<script src="styles/bootstrap4/bootstrap.min.js"></script>
