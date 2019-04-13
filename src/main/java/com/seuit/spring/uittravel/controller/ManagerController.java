@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.seuit.spring.uittravel.entity.Order;
 import com.seuit.spring.uittravel.entity.Tour;
 import com.seuit.spring.uittravel.entity.TourFull;
+import com.seuit.spring.uittravel.service.OrderService;
 import com.seuit.spring.uittravel.service.TourService;
 
 import javassist.NotFoundException;
@@ -28,6 +31,9 @@ public class ManagerController {
 	@Autowired
 	private TourService tourService;
 
+	@Autowired
+	private OrderService orderService;
+	
 	@GetMapping("")
 	public String showIndex() {
 		return "managerPage";
@@ -86,5 +92,19 @@ public class ManagerController {
 		}
 		model.addAttribute("tourFull", tourFull);
 		return "editTourForm";
+	}
+	
+	@GetMapping("/order")
+	public String showAllOrder(Model model) {
+		List<Order> listOrder = orderService.getAllOrder();
+		model.addAttribute("listOrder", listOrder);
+		model.addAttribute("order", new Order());
+		return "manageOrderPage";
+	}
+	
+	@PostMapping("/order/check/{id}")
+	public String checkOrder(@PathVariable(value="id") Integer id, RedirectAttributes redirect) {
+		orderService.check(id);
+		return "redirect:/manager/order";
 	}
 }

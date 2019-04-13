@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "order_tour")
 public class Order {
@@ -16,7 +18,7 @@ public class Order {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID_ORDER")
 	private Integer id;
-
+	
 	@Column(name = "NAME")
 	private String name;
 
@@ -32,6 +34,9 @@ public class Order {
 	@Column(name = "DECRIPTION")
 	private String decription;
 
+	@Column(name = "STATUS")
+	private Integer status;
+	
 	@ManyToOne
 	@JoinColumn(name = "ID_TOUR")
 	private Tour tour;
@@ -84,6 +89,15 @@ public class Order {
 		this.decription = decription;
 	}
 
+	
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
 	public Tour getTour() {
 		return tour;
 	}
@@ -92,14 +106,18 @@ public class Order {
 		this.tour = tour;
 	}
 
-	public Order(Integer id, String name, Integer phone, String address, Integer passengers, String decription) {
+	
+
+	public Order(String name, Integer phone, String address, Integer passengers, String decription, Integer status,
+			Tour tour) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.phone = phone;
 		this.address = address;
 		this.passengers = passengers;
 		this.decription = decription;
+		this.status = status;
+		this.tour = tour;
 	}
 
 	public Order() {
@@ -110,7 +128,8 @@ public class Order {
 	@Override
 	public String toString() {
 		return "Order [id=" + id + ", name=" + name + ", phone=" + phone + ", address=" + address + ", passengers="
-				+ passengers + ", decription=" + decription + ", tour=" + tour + "]";
+				+ passengers + ", decription=" + decription + ", status=" + status + ", tour=" + tour + "]";
 	}
 
+	
 }

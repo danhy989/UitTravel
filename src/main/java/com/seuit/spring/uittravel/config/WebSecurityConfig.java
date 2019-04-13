@@ -22,14 +22,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
-}
-	 @Bean
-	    CorsConfigurationSource corsConfigurationSource() {
-	        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-	        source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
-	        return source;
-	    }
-	
+	}
+
+	@Bean
+	CorsConfigurationSource corsConfigurationSource() {
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
+		return source;
+	}
+
 	@Autowired
 	private CustomUserDetailServiceImpl customUserDetailServiceImpl;
 
@@ -40,19 +41,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		auth.userDetailsService(customUserDetailServiceImpl).passwordEncoder(passwordEncoder());
 	}
 
-
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http
-				.cors().and()
-			.authorizeRequests().antMatchers("/admin/**").hasRole("admin")
-								.antMatchers("/manager/**").hasRole("manager")
-								.antMatchers("/**").permitAll().and()
-								.formLogin()
-								.successForwardUrl("/loading")
-								.and().logout().permitAll().invalidateHttpSession(true).and().exceptionHandling()
-								.accessDeniedPage("/access-denied");
-								
+		http.httpBasic().and().cors().and().authorizeRequests().antMatchers("/admin/**").hasRole("admin")
+				.antMatchers("/manager/**").hasRole("manager").antMatchers("/**").permitAll().and().formLogin()
+				.successForwardUrl("/loading").and().logout().permitAll().invalidateHttpSession(true).and()
+				.exceptionHandling().accessDeniedPage("/access-denied").and().csrf().disable();
 
 	}
 
