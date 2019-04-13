@@ -249,16 +249,23 @@
 					          <label data-error="wrong" data-success="right" for="form2">Decription</label>
 					          <input type="text" id="form2" name="decription" class="form-control validate">       
 					        </div>
+
+					        <div hidden="true" class="md-form mb-4">
+					          <i class="fa fa-file-text" aria-hidden="true"></i>
+					          <label data-error="wrong" data-success="right" for="form2">id</label>
+					          <input type="text" id="order" name="id" class="form-control validate">       
+					        </div>
 					      </div>
 					      <div class="modal-footer d-flex justify-content-center">
-					        <button class="btn btn-success">Send <i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+					        <button onclick="document.getElementById('order').value = document.getElementById('id').innerHTML"
+					        class="btn btn-success">Send <i class="fa fa-paper-plane" aria-hidden="true"></i></button>
 					      </div>
 					    </div>
 					  </div>
 					</div>
 
 <div class="text-center">
-  <a href="" class="btn btn-danger btn-rounded mb-4" data-toggle="modal" data-target="#modalSubscriptionForm">Book This Tour</a>
+  <a href="" class="btn btn-danger btn-rounded mb-4" data-toggle="modal" data-target="#modalSubscriptionForm">Đặt tour</a>
 </div>
 </form>
 					<!-- Comments Form -->
