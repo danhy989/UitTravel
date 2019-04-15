@@ -3,7 +3,6 @@ package com.seuit.spring.uittravel.service;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
-import java.util.logging.Logger;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
@@ -15,10 +14,7 @@ import org.springframework.stereotype.Service;
 import com.seuit.spring.uittravel.entity.Order;
 import com.seuit.spring.uittravel.entity.OrderAPI;
 import com.seuit.spring.uittravel.entity.Tour;
-import com.seuit.spring.uittravel.entity.TourInformation;
-import com.seuit.spring.uittravel.entity.User;
 import com.seuit.spring.uittravel.repository.OrderRepository;
-import com.seuit.spring.uittravel.repository.TourInforRepository;
 import com.seuit.spring.uittravel.repository.TourRepository;
 
 @Service

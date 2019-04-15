@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.seuit.spring.uittravel.entity.Feedback;
 import com.seuit.spring.uittravel.entity.Order;
 import com.seuit.spring.uittravel.entity.Tour;
 import com.seuit.spring.uittravel.entity.TourFull;
+import com.seuit.spring.uittravel.service.FeedbackService;
 import com.seuit.spring.uittravel.service.OrderService;
 import com.seuit.spring.uittravel.service.TourService;
 
@@ -33,7 +35,10 @@ public class ManagerController {
 
 	@Autowired
 	private OrderService orderService;
-	
+
+	@Autowired
+	private FeedbackService feedbackService;
+
 	@GetMapping("")
 	public String showIndex() {
 		return "managerPage";
@@ -93,7 +98,7 @@ public class ManagerController {
 		model.addAttribute("tourFull", tourFull);
 		return "editTourForm";
 	}
-	
+
 	@GetMapping("/order")
 	public String showAllOrder(Model model) {
 		List<Order> listOrder = orderService.getAllOrder();
@@ -101,10 +106,24 @@ public class ManagerController {
 		model.addAttribute("order", new Order());
 		return "manageOrderPage";
 	}
-	
+
 	@PostMapping("/order/check/{id}")
-	public String checkOrder(@PathVariable(value="id") Integer id, RedirectAttributes redirect) {
+	public String checkOrder(@PathVariable(value = "id") Integer id, RedirectAttributes redirect) {
 		orderService.check(id);
 		return "redirect:/manager/order";
+	}
+
+	@GetMapping("/feedback")
+	public String showAllFeedback(Model model) {
+		List<Feedback> listFeedback = feedbackService.getAllFeedback();
+		model.addAttribute("listFeedback", listFeedback);
+		model.addAttribute("feedback", new Feedback());
+		return "feedbackPage";
+	}
+	
+	@PostMapping("/feedback/check/{id}")
+	public String checkFeedback(@PathVariable(value = "id") Integer id, RedirectAttributes redirect) {
+		feedbackService.check(id);
+		return "redirect:/manager/feedback";
 	}
 }
