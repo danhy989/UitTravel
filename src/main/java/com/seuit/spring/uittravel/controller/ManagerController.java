@@ -118,6 +118,41 @@ public class ManagerController {
 		return "redirect:/manager/order";
 	}
 
+	@PostMapping("/tour/importExcel")
+	public String importExcel(@RequestParam MultipartFile file, RedirectAttributes redirect) {
+		ProductExcelHelper productExcelHelper = new ProductExcelHelper();
+		File excelFile = convert(file);
+		List<TourFull> tourFull;
+		try {
+			tourFull = productExcelHelper.saveProductsFromExcelFile(excelFile);
+			tourFull.stream().forEach((tour) -> {
+				try {
+					tourService.addTour(tour);
+				} catch (NotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			});
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		return "redirect:/manager/tour";
+	}
+
+	public File convert(MultipartFile file) {
+		File convFile = new File(file.getOriginalFilename());
+		try {
+			convFile.createNewFile();
+			FileOutputStream fos = new FileOutputStream(convFile);
+			fos.write(file.getBytes());
+			fos.close();
+			return convFile;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	@GetMapping("/feedback")
 	public String showAllFeedback(Model model) {
 		List<Feedback> listFeedback = feedbackService.getAllFeedback();
