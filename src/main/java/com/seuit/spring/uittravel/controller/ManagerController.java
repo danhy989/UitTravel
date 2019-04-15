@@ -19,10 +19,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.seuit.spring.uittravel.entity.Feedback;
 import com.seuit.spring.uittravel.entity.Order;
 import com.seuit.spring.uittravel.entity.Tour;
 import com.seuit.spring.uittravel.entity.TourFull;
-import com.seuit.spring.uittravel.helper.ProductExcelHelper;
+import com.seuit.spring.uittravel.service.FeedbackService;
 import com.seuit.spring.uittravel.service.OrderService;
 import com.seuit.spring.uittravel.service.TourService;
 
@@ -39,6 +40,9 @@ public class ManagerController {
 
 	@Autowired
 	private OrderService orderService;
+
+	@Autowired
+	private FeedbackService feedbackService;
 
 	@GetMapping("")
 	public String showIndex() {
@@ -114,40 +118,17 @@ public class ManagerController {
 		return "redirect:/manager/order";
 	}
 
-	@PostMapping("/tour/importExcel")
-	public String importExcel(@RequestParam MultipartFile file, RedirectAttributes redirect) {
-		ProductExcelHelper productExcelHelper = new ProductExcelHelper();
-		File excelFile = convert(file);
-		List<TourFull> tourFull;
-		try {
-			tourFull = productExcelHelper.saveProductsFromExcelFile(excelFile);
-			tourFull.stream().forEach((tour) -> {
-				try {
-					tourService.addTour(tour);
-				} catch (NotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			});
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		return "redirect:/manager/tour";
+	@GetMapping("/feedback")
+	public String showAllFeedback(Model model) {
+		List<Feedback> listFeedback = feedbackService.getAllFeedback();
+		model.addAttribute("listFeedback", listFeedback);
+		model.addAttribute("feedback", new Feedback());
+		return "feedbackPage";
 	}
-
-	public File convert(MultipartFile file) {
-		File convFile = new File(file.getOriginalFilename());
-		try {
-			convFile.createNewFile();
-			FileOutputStream fos = new FileOutputStream(convFile);
-			fos.write(file.getBytes());
-			fos.close();
-			return convFile;
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
+	
+	@PostMapping("/feedback/check/{id}")
+	public String checkFeedback(@PathVariable(value = "id") Integer id, RedirectAttributes redirect) {
+		feedbackService.check(id);
+		return "redirect:/manager/feedback";
 	}
 }
