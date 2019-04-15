@@ -43,7 +43,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.httpBasic().and().cors().and().authorizeRequests().antMatchers("/admin/**").hasRole("admin")
+		http
+		.httpBasic()
+		.and()
+		.cors()
+		.and().
+		authorizeRequests().antMatchers("/admin/**").hasRole("admin")
 				.antMatchers("/manager/**").hasRole("manager").antMatchers("/**").permitAll().and().formLogin()
 				.successForwardUrl("/loading").and().logout().permitAll().invalidateHttpSession(true).and()
 				.exceptionHandling().accessDeniedPage("/access-denied").and().csrf().disable();

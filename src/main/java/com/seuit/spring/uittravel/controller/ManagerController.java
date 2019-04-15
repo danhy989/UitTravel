@@ -1,5 +1,8 @@
 package com.seuit.spring.uittravel.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -12,11 +15,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.seuit.spring.uittravel.entity.Order;
 import com.seuit.spring.uittravel.entity.Tour;
 import com.seuit.spring.uittravel.entity.TourFull;
+import com.seuit.spring.uittravel.helper.ProductExcelHelper;
 import com.seuit.spring.uittravel.service.OrderService;
 import com.seuit.spring.uittravel.service.TourService;
 
@@ -33,7 +39,7 @@ public class ManagerController {
 
 	@Autowired
 	private OrderService orderService;
-	
+
 	@GetMapping("")
 	public String showIndex() {
 		return "managerPage";
@@ -93,7 +99,7 @@ public class ManagerController {
 		model.addAttribute("tourFull", tourFull);
 		return "editTourForm";
 	}
-	
+
 	@GetMapping("/order")
 	public String showAllOrder(Model model) {
 		List<Order> listOrder = orderService.getAllOrder();
@@ -101,10 +107,47 @@ public class ManagerController {
 		model.addAttribute("order", new Order());
 		return "manageOrderPage";
 	}
-	
+
 	@PostMapping("/order/check/{id}")
-	public String checkOrder(@PathVariable(value="id") Integer id, RedirectAttributes redirect) {
+	public String checkOrder(@PathVariable(value = "id") Integer id, RedirectAttributes redirect) {
 		orderService.check(id);
 		return "redirect:/manager/order";
+	}
+
+	@PostMapping("/tour/importExcel")
+	public String importExcel(@RequestParam MultipartFile file, RedirectAttributes redirect) {
+		ProductExcelHelper productExcelHelper = new ProductExcelHelper();
+		File excelFile = convert(file);
+		List<TourFull> tourFull;
+		try {
+			tourFull = productExcelHelper.saveProductsFromExcelFile(excelFile);
+			tourFull.stream().forEach((tour) -> {
+				try {
+					tourService.addTour(tour);
+				} catch (NotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			});
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		return "redirect:/manager/tour";
+	}
+
+	public File convert(MultipartFile file) {
+		File convFile = new File(file.getOriginalFilename());
+		try {
+			convFile.createNewFile();
+			FileOutputStream fos = new FileOutputStream(convFile);
+			fos.write(file.getBytes());
+			fos.close();
+			return convFile;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

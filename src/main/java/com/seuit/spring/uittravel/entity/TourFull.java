@@ -1,5 +1,6 @@
 package com.seuit.spring.uittravel.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TourFull {
@@ -9,7 +10,7 @@ public class TourFull {
 	private String image;
 	private String title;
 	private String detail;
-	private List<String> images;
+	private List<String> images = new ArrayList<String>();
 	private Double price;
 	private Integer status;
 	private Integer province;
