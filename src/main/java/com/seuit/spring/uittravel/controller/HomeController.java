@@ -46,7 +46,7 @@ public class HomeController {
 	public String showContactPage() {
 		return "contact";
 	}
-	
+
 	@GetMapping("/about")
 	public String showAboutPage() {
 		return "about";
@@ -57,8 +57,13 @@ public class HomeController {
 		return "search_results";
 	}
 
+	@GetMapping("/tours_by_prov")
+	public String showToursByProvince() {
+		return "toursByProvince";
+	}
+
 	@PostMapping("/addComment")
-	public void saveComment(@ModelAttribute(name="cmt") Comment cmt) {
+	public void saveComment(@ModelAttribute(name = "cmt") Comment cmt) {
 		try {
 			tourService.addComment(cmt, 1);
 		} catch (NotFoundException e) {
@@ -66,9 +71,10 @@ public class HomeController {
 			e.printStackTrace();
 		}
 	}
+
 	@GetMapping("/testAddComment")
 	public String testAddComment() {
-		Comment cmt = new Comment("duyAnh","123456121");
+		Comment cmt = new Comment("duyAnh", "123456121");
 		try {
 			tourService.addComment(cmt, 1);
 		} catch (NotFoundException e) {
