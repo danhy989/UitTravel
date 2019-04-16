@@ -60,3 +60,12 @@
     font-weight: 400;
     color: #FFFFFF;
 }
+
+.special_item_background {
+    background: #000;
+}
+
+.special_item_background img {
+    height: 480px;
+    opacity: 0.8;
+}
