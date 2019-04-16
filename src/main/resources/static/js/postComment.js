@@ -18,12 +18,12 @@ function submitComment(){
 	xhttp.setRequestHeader('Content-type',
 			'application/json; charset=utf-8');
 	xhttp.onload = function() {
-
 		if (xhttp.readyState == 4 && xhttp.status == "200") {
-			 location.reload();
+			$('#areaComment')
+            .append('<div class="media mb-4"><img class="d-flex mr-3 rounded-circle" src="https://img.icons8.com/ios/50/000000/administrator-male.png" alt=""><div class="media-body"><h5 class="mt-0">'+comment.name+'</h5>'+comment.content+'</div></div>');
 		} else {
 			console.log("Add error");
-			alert("Bạn đã order thất bại");
+			alert("Bạn đã comment thất bại");
 		}
 	}
 	xhttp.send(json);

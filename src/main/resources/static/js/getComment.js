@@ -1,4 +1,4 @@
-$(document).ready(function(){
+window.onload = function(){
     var windowsHref = window.location.href;
 	var urlWindowHref = new URL(windowsHref);
 	var idTourInfor = urlWindowHref.searchParams.get("id");
@@ -19,5 +19,5 @@ $(document).ready(function(){
     xhttp.open("GET", url, true);
     xhttp.send();
 
-});
+}
     
