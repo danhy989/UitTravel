@@ -30,7 +30,7 @@ public class Comment {
 	@ManyToOne
 	@JsonIgnore
 	@JoinColumn(name="ID_TOUR_INFO")
-	private TourInformation tourInfo;
+	private TourInformation tourInfo ;
 
 	public Integer getId() {
 		return id;
