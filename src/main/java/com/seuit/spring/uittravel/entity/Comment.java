@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 
 @Entity
@@ -26,6 +28,7 @@ public class Comment {
 	private String content;
 	
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name="ID_TOUR_INFO")
 	private TourInformation tourInfo;
 
