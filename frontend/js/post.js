@@ -10,6 +10,7 @@ function summit(){
 	formData.passengers = parseInt(document.getElementById("myForm").elements[3].value);
 	formData.decription = document.getElementById("myForm").elements[4].value;
 	post.order =JSON.stringify(formData);
+	post.order = JSON.parse(post.order);
 	post.idTour = idTour;
 	$.ajax({
 	  type: "POST",
