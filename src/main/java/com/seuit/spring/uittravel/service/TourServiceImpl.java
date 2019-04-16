@@ -10,7 +10,10 @@ import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
+
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,9 +35,12 @@ import javassist.NotFoundException;
 
 @Service
 public class TourServiceImpl implements TourService {
-
+	
 	@Autowired
-	private EntityManagerFactory entityManagerFactory;
+	private EntityManager entityManager;
+	private Session getSession() {
+		return entityManager.unwrap(Session.class);
+	}
 
 	@Autowired
 	private TourRepository tourRepository;
@@ -187,12 +193,12 @@ public class TourServiceImpl implements TourService {
 	@Transactional
 	public List<TourApi> getAllTourByAreaId(Integer Id) {
 		// TODO Auto-generated method stub
-		EntityManager entity = entityManagerFactory.createEntityManager();
+		Session session = this.getSession();
 		String sql = "select new com.seuit.spring.uittravel.entity.TourApi(t.id,t.name,t.image,tif.price) "
 				+ "from Area a " + "inner join Province p on a.id=p.area "
 				+ "inner join TourInformation tif on p.id=tif.province " + "inner join Tour t on t.tourInfor=tif.id "
 				+ "where a.id=:areaId ORDER BY rand()";
-		javax.persistence.Query query = entity.createQuery(sql).setMaxResults(3);
+		Query query = session.createQuery(sql).setMaxResults(3);
 		query.setParameter("areaId", Id);
 		return query.getResultList();
 	}
@@ -229,10 +235,10 @@ public class TourServiceImpl implements TourService {
 	@Transactional
 	public List<Tour> getAllTourByProvinceId(Integer Id) {
 		// TODO Auto-generated method stub
-		EntityManager entity = entityManagerFactory.createEntityManager();
+		Session session = this.getSession();
 		String sql = "select t " + "from Province p " + "inner join TourInformation tif on p.id=tif.province "
 				+ "inner join Tour t on t.tourInfor=tif.id " + "where p.id=:provinceId";
-		javax.persistence.Query query = entity.createQuery(sql);
+		Query query = session.createQuery(sql);
 		query.setParameter("provinceId", Id);
 		return query.getResultList();
 	}
@@ -242,12 +248,12 @@ public class TourServiceImpl implements TourService {
 	@Transactional
 	public List<Tour> getTopTourOrder() {
 		// TODO Auto-generated method stub
-		EntityManager entity = entityManagerFactory.createEntityManager();
+		Session session = this.getSession();
 		String sql = "select new com.seuit.spring.uittravel.entity.TourApi(t.id,t.name,t.image,tif.price) "
 				+ "from Order o " + "inner join Tour t on t.id=o.tour.id "
 				+ "inner join TourInformation tif on tif.id=t.tourInfor " + "group by o.tour "
 				+ "order by count(o.tour) desc";
-		javax.persistence.Query query = entity.createQuery(sql).setMaxResults(8);
+		Query query = session.createQuery(sql).setMaxResults(8);
 		return query.getResultList();
 	}
 
@@ -255,10 +261,10 @@ public class TourServiceImpl implements TourService {
 	@Override
 	@Transactional
 	public List<Tour> getTourByKeyword(String keyword) {
-		EntityManager entity = entityManagerFactory.createEntityManager();
+		Session session = this.getSession();
 		String sql = "select new com.seuit.spring.uittravel.entity.TourApi(t.id,t.name,t.image,tif.price,tif.detail)"
 				+ " from Tour t inner join TourInformation tif on tif.id=t.tourInfor" + " where t.name like :code";
-		javax.persistence.Query query = entity.createQuery(sql).setMaxResults(10);
+		Query query = session.createQuery(sql).setMaxResults(10);
 		query.setParameter("code", "%" + keyword + "%");
 		return query.getResultList();
 	}

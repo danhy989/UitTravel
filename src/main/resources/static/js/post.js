@@ -4,8 +4,12 @@ function summit(){
 	var url = "/rest/order";
 	var post = {};
 	var order ={};
+	var windowsHref = window.location.href;
+	var urlWindowHref = new URL(windowsHref);
+	var c = urlWindowHref.searchParams.get("id");
+	console.log(c);
 	var xhttp = new XMLHttpRequest();
-	var idTour =parseInt(document.getElementById('id').innerHTML);
+	var idTour =parseInt(c);
 	order.name = document.getElementById("orderName").value;
 	order.phone =parseInt(document.getElementById("orderPhone").value);
 	order.address = document.getElementById("orderAddress").value;
