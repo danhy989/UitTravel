@@ -1,25 +1,31 @@
 
 
 function summit(){
+	var url = "/rest/order";
 	var post = {};
-	var formData ={};
+	var order ={};
+	var xhttp = new XMLHttpRequest();
 	var idTour =parseInt(document.getElementById('id').innerHTML);
-	formData.name = document.getElementById("myForm").elements[0].value;
-	formData.phone =parseInt(document.getElementById("myForm").elements[1].value);
-	formData.address = document.getElementById("myForm").elements[2].value;
-	formData.passengers = parseInt(document.getElementById("myForm").elements[3].value);
-	formData.decription = document.getElementById("myForm").elements[4].value;
-	post.order =JSON.stringify(formData);
-	post.order = JSON.parse(post.order);
+	order.name = document.getElementById("orderName").value;
+	order.phone =parseInt(document.getElementById("orderPhone").value);
+	order.address = document.getElementById("orderAddress").value;
+	order.passengers = parseInt(document.getElementById("orderPassenger").value);
+	order.decription = document.getElementById("orderDecription").value;
+	post.order = order;  
 	post.idTour = idTour;
-	$.ajax({
-	  type: "POST",
-	  url: "manager/rest/order",
-	  data: post,
-	  success: function(){
-	  	alert("success");
-	  },
-	  dataType: "json",
-	  contentType : "application/json"
-	});
+	var json =JSON.stringify(post);
+	xhttp.open("POST", url, true);
+	xhttp.setRequestHeader('Content-type',
+			'application/json; charset=utf-8');
+	xhttp.onload = function() {
+
+		if (xhttp.readyState == 4 && xhttp.status == "200") {
+			alert("Bạn đã order thành công");
+			location.reload();
+		} else {
+			console.log("Add error");
+			alert("Bạn đã order thất bại");
+		}
+	}
+	xhttp.send(json);
 }

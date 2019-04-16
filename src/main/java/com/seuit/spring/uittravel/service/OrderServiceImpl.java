@@ -51,6 +51,7 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
+	@Transactional
 	public void saveOrder(OrderAPI orderAPI) {
 		Order order = orderAPI.getOrder();
 		Optional<Tour> tour = tourRepository.findById(orderAPI.getIdTour());
