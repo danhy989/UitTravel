@@ -2,49 +2,81 @@
 <html lang="en">
 
 <head>
-    <title>UIT Travel - Liên hệ</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Destino project">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
-    <link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="styles/contact_styles.css">
-    <link rel="stylesheet" type="text/css" href="styles/contact_responsive.css">
+<title>UIT Travel - Liên hệ</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Destino project">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css"
+	href="styles/bootstrap4/bootstrap.min.css">
+<link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="styles/contact_styles.css">
+<link rel="stylesheet" type="text/css"
+	href="styles/contact_responsive.css">
+<script type="text/javascript">
+	function submit() {
+		var url = "/rest/feedback";
+		var post = {};
+		var xhttp = new XMLHttpRequest();
+		post.name = document.getElementById("fbName").value;
+		post.email = document.getElementById("fbEmail").value;
+		post.title = document.getElementById("fbTitle").value;
+		post.content = document.getElementById("fbContent").value;
+		var json = JSON.stringify(post);
+		xhttp.open("POST", url, true);
+		xhttp.setRequestHeader('Content-type',
+				'application/json; charset=utf-8');
+		xhttp.onload = function() {
+
+			if (xhttp.readyState == 4 && xhttp.status == "200") {
+				alert("Cám ơn những đóng góp ý kiến của bạn");
+				location.reload();
+			} else {
+				console.log("Add error");
+				alert("Gửi ý kiến thất bại");
+			}
+		}
+		xhttp.send(json);
+	}
+</script>
 </head>
 
 <body>
 
-    <div class="super_container">
+	<div class="super_container">
 
-        <!-- Header -->
+		<!-- Header -->
 
-        <header class="header">
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <div class="header_container d-flex flex-row align-items-center justify-content-start">
+		<header class="header">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<div
+							class="header_container d-flex flex-row align-items-center justify-content-start">
 
-                            <!-- Logo -->
-                            <div class="logo_container">
-                                <div class="logo">
-                                    <div>uit</div>
-                                    <div>travel</div>
-                                    <div class="logo_image"><img src="images/logo.png" alt=""></div>
-                                </div>
-                            </div>
+							<!-- Logo -->
+							<div class="logo_container">
+								<div class="logo">
+									<div>uit</div>
+									<div>travel</div>
+									<div class="logo_image">
+										<img src="images/logo.png" alt="">
+									</div>
+								</div>
+							</div>
 
-                            <!-- Main Navigation -->
-                            <nav class="main_nav ml-auto">
-                                <ul class="main_nav_list">
-                                    <li class="main_nav_item"><a href="/">Trang chủ</a></li>
-                                    <li class="main_nav_item"><a href="about">Về chúng tôi</a></li>
-                                    <li class="main_nav_item active"><a href="">Liên hệ</a></li>
-                                </ul>
-                            </nav>
+							<!-- Main Navigation -->
+							<nav class="main_nav ml-auto">
+								<ul class="main_nav_list">
+									<li class="main_nav_item"><a href="/">Trang chủ</a></li>
+									<li class="main_nav_item"><a href="about">Về chúng tôi</a></li>
+									<li class="main_nav_item active"><a href="">Liên hệ</a></li>
+								</ul>
+							</nav>
 
-                            <!-- Search -->
-                            <div class="search">
+							<!-- Search -->
+							<div class="search">
 								<form action="#" class="search_form">
 									<input type="search" name="search_input"
 										class="search_input ctrl_class" required="required"
@@ -55,244 +87,294 @@
 								</form>
 							</div>
 
-                            <!-- Hamburger -->
-                            <div class="hamburger ml-auto"><i class="fa fa-bars" aria-hidden="true"></i></div>
+							<!-- Hamburger -->
+							<div class="hamburger ml-auto">
+								<i class="fa fa-bars" aria-hidden="true"></i>
+							</div>
 
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
 
-        <!-- Menu -->
+		<!-- Menu -->
 
-        <div class="menu_container menu_mm">
+		<div class="menu_container menu_mm">
 
-            <!-- Menu Close Button -->
-            <div class="menu_close_container">
-                <div class="menu_close"></div>
-            </div>
+			<!-- Menu Close Button -->
+			<div class="menu_close_container">
+				<div class="menu_close"></div>
+			</div>
 
-            <!-- Menu Items -->
-            <div class="menu_inner menu_mm">
-                <div class="menu menu_mm">
-                    <div class="menu_search_form_container">
-                        <form action="#" id="menu_search_form">
-                            <input type="search" class="menu_search_input menu_mm">
-                            <div id="menu_search_submit" class="menu_search_submit"><img src="images/search_2.png" alt=""></div>
-                        </form>
-                    </div>
-                    <ul class="menu_list menu_mm">
-                        <li class="menu_item menu_mm"><a href="/">Trang chủ</a></li>
-                        <li class="menu_item menu_mm"><a href="about">Về chúng tôi</a></li>
-                        <li class="menu_item menu_mm"><a href="">Liên hệ</a></li>
-                    </ul>
+			<!-- Menu Items -->
+			<div class="menu_inner menu_mm">
+				<div class="menu menu_mm">
+					<div class="menu_search_form_container">
+						<form action="#" id="menu_search_form">
+							<input type="search" class="menu_search_input menu_mm">
+							<div id="menu_search_submit" class="menu_search_submit">
+								<img src="images/search_2.png" alt="">
+							</div>
+						</form>
+					</div>
+					<ul class="menu_list menu_mm">
+						<li class="menu_item menu_mm"><a href="/">Trang chủ</a></li>
+						<li class="menu_item menu_mm"><a href="about">Về chúng
+								tôi</a></li>
+						<li class="menu_item menu_mm"><a href="">Liên hệ</a></li>
+					</ul>
 
-                    <!-- Menu Social -->
+					<!-- Menu Social -->
 
-                    <div class="menu_social_container menu_mm">
-                        <ul class="menu_social menu_mm">
-                            <li class="menu_social_item menu_mm"><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
-                            <li class="menu_social_item menu_mm"><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                            <li class="menu_social_item menu_mm"><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                            <li class="menu_social_item menu_mm"><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
+					<div class="menu_social_container menu_mm">
+						<ul class="menu_social menu_mm">
+							<li class="menu_social_item menu_mm"><a href="#"><i
+									class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+							<li class="menu_social_item menu_mm"><a href="#"><i
+									class="fa fa-instagram" aria-hidden="true"></i></a></li>
+							<li class="menu_social_item menu_mm"><a href="#"><i
+									class="fa fa-facebook" aria-hidden="true"></i></a></li>
+							<li class="menu_social_item menu_mm"><a href="#"><i
+									class="fa fa-twitter" aria-hidden="true"></i></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
 
-        <!-- Home -->
+		<!-- Home -->
 
-        <div class="home">
-            <div class="home_background parallax-window" data-parallax="scroll" data-image-src="images/news.jpg" data-speed="1.4"></div>
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <div class="home_content">
-                            <div class="home_content_inner">
-                                <div class="home_title">Liên hệ</div>
-                                <div class="home_breadcrumbs">
-                                    <ul class="home_breadcrumbs_list">
-                                        <li class="home_breadcrumb"><a href="/">Trang chủ</a></li>
-                                        <li class="home_breadcrumb">Liên hệ</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+		<div class="home">
+			<div class="home_background parallax-window" data-parallax="scroll"
+				data-image-src="images/news.jpg" data-speed="1.4"></div>
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<div class="home_content">
+							<div class="home_content_inner">
+								<div class="home_title">Liên hệ</div>
+								<div class="home_breadcrumbs">
+									<ul class="home_breadcrumbs_list">
+										<li class="home_breadcrumb"><a href="/">Trang chủ</a></li>
+										<li class="home_breadcrumb">Liên hệ</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
-        <!-- Contact -->
+		<!-- Contact -->
 
-        <div class="contact">
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <div class="contact_title">Hãy nói những gì bạn nghĩ về chúng tôi</div>
-                        <div class="contact_subtitle">gửi một lời nhắn</div>
-                    </div>
-                </div>
-                <div class="row contact_content">
-                    <div class="col-lg-5">
-                        <div class="contact_text">
-                            <p><em>Giới thiệu về UIT Travel:</em><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce fringilla lectus nec diam auctor, ut fringilla diam sagittis. Quisque vel est id justo faucibus dapibus id a nibh. Aenean suscipit consequat lacus, sit amet mollis nulla. Morbi sagittis orci id lacus convallis tempus eget sit amet metus.</p>
-                        </div>
-                        <div class="contact_info">
-                            <div class="contact_info_box">i</div>
-                            <div class="contact_info_container">
-                                <div class="contact_info_content">
-                                    <ul>
-                                        <li>Địa chỉ: ???</li>
-                                        <li>Điện thoại: +84 1234 6789</li>
-                                        <li>Email: uit_travel@gmail.com</li>
-                                    </ul>
-                                </div>
-                                <div class="contact_info_social">
-                                    <ul>
-                                        <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-7">
-                        <div class="contact_form_container">
-                            <form action="#" id="contact_form" class="clearfix">
-                                <input id="contact_input_name" class="contact_input contact_input_name" type="text" placeholder="Tên" required="required" data-error="Name is required.">
-                                <input id="contact_input_email" class="contact_input contact_input_email" type="text" placeholder="E-mail" required="required" data-error="E-mail is required.">
-                                <input id="contact_input_subject" class="contact_input contact_input_subject" type="text" placeholder="Chủ đề">
-                                <textarea id="contact_input_message" class="contact_message_input contact_input_message" name="message" placeholder="Lời nhắn" required="required" data-error="Please, write us a message."></textarea>
-                                <button id="contact_send_btn" type="submit" class="contact_send_btn trans_200" value="Submit">Gửi</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>                
-            </div>
-        </div>
+		<div class="contact">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<div class="contact_title">Hãy nói những gì bạn nghĩ về
+							chúng tôi</div>
+						<div class="contact_subtitle">gửi một lời nhắn</div>
+					</div>
+				</div>
+				<div class="row contact_content">
+					<div class="col-lg-5">
+						<div class="contact_text">
+							<p>
+								<em>Giới thiệu về UIT Travel:</em><br>Lorem ipsum dolor sit
+								amet, consectetur adipiscing elit. Fusce fringilla lectus nec
+								diam auctor, ut fringilla diam sagittis. Quisque vel est id
+								justo faucibus dapibus id a nibh. Aenean suscipit consequat
+								lacus, sit amet mollis nulla. Morbi sagittis orci id lacus
+								convallis tempus eget sit amet metus.
+							</p>
+						</div>
+						<div class="contact_info">
+							<div class="contact_info_box">i</div>
+							<div class="contact_info_container">
+								<div class="contact_info_content">
+									<ul>
+										<li>Địa chỉ: ???</li>
+										<li>Điện thoại: +84 1234 6789</li>
+										<li>Email: uit_travel@gmail.com</li>
+									</ul>
+								</div>
+								<div class="contact_info_social">
+									<ul>
+										<li><a href="#"><i class="fa fa-google-plus"
+												aria-hidden="true"></i></a></li>
+										<li><a href="#"><i class="fa fa-pinterest"
+												aria-hidden="true"></i></a></li>
+										<li><a href="#"><i class="fa fa-facebook"
+												aria-hidden="true"></i></a></li>
+										<li><a href="#"><i class="fa fa-twitter"
+												aria-hidden="true"></i></a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-7">
+						<div class="contact_form_container">
 
-        <!-- Newsletter -->
+							<input id="fbName" class="contact_input contact_input_name"
+								type="text" placeholder="Tên" required="required"
+								data-error="Name is required."> <input id="fbEmail"
+								class="contact_input contact_input_email" type="text"
+								placeholder="E-mail" required="required"
+								data-error="E-mail is required."> <input id="fbTitle"
+								class="contact_input contact_input_subject" type="text"
+								placeholder="Chủ đề">
+							<textarea id="fbContent"
+								class="contact_message_input contact_input_message"
+								name="message" placeholder="Lời nhắn" required="required"
+								data-error="Please, write us a message."></textarea>
+							<button onclick="submit()" class="contact_send_btn trans_200"
+								value="Submit">Gửi</button>
 
-        <div class="newsletter">
-            <!-- Image by https://unsplash.com/@garciasaldana_ -->
-            <div class="newsletter_background" style="background-image:url(images/newsletter.jpg)"></div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-10 offset-lg-1">
-                        <div class="newsletter_content">
-                            <div class="newsletter_title text-center">Nhận thông tin mới nhất từ chúng tôi</div>
-                            <div class="newsletter_form_container">
-                                <form action="#" id="newsletter_form" class="newsletter_form">
-                                    <div class="d-flex flex-md-row flex-column align-content-center justify-content-between">
-                                        <input type="email" id="newsletter_input" class="newsletter_input" placeholder="Địa chỉ e-mail của bạn">
-                                        <button type="submit" id="newsletter_button" class="newsletter_button">Đăng ký</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
-        <!-- Footer -->
+		<!-- Newsletter -->
 
-        <footer class="footer">
-            <div class="container">
-                <div class="row">
+		<div class="newsletter">
+			<!-- Image by https://unsplash.com/@garciasaldana_ -->
+			<div class="newsletter_background"
+				style="background-image: url(images/newsletter.jpg)"></div>
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-10 offset-lg-1">
+						<div class="newsletter_content">
+							<div class="newsletter_title text-center">Nhận thông tin
+								mới nhất từ chúng tôi</div>
+							<div class="newsletter_form_container">
+								<form action="#" id="newsletter_form" class="newsletter_form">
+									<div
+										class="d-flex flex-md-row flex-column align-content-center justify-content-between">
+										<input type="email" id="newsletter_input"
+											class="newsletter_input" placeholder="Địa chỉ e-mail của bạn">
+										<button type="submit" id="newsletter_button"
+											class="newsletter_button">Đăng ký</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
-                    <!-- Footer Column -->
-                    <div class="col-lg-4 footer_col">
-                        <div class="footer_about">
-                            <!-- Logo -->
-                            <div class="logo_container">
-                                <div class="logo">
-                                    <div>uit</div>
-                                    <div>travel</div>
-                                    <div class="logo_image"><img src="images/logo.png" alt=""></div>
-                                </div>
-                            </div>
-                            <div class="footer_about_text">Trang thông tin du lịch trong nước.</div>
-                            <div class="copyright">
-                                Copyright &copy;<script>
-                                    document.write(new Date().getFullYear());
+		<!-- Footer -->
 
-                                </script>. All rights reserved.
-                            </div>
-                        </div>
-                    </div>
+		<footer class="footer">
+			<div class="container">
+				<div class="row">
 
-                    <!-- Footer Column -->
-                    <div class="col-lg-4 footer_col">
-                        <div class="footer_latest">
-                            <div class="footer_title">Tin mới nhất</div>
-                            <div class="footer_latest_content">
+					<!-- Footer Column -->
+					<div class="col-lg-4 footer_col">
+						<div class="footer_about">
+							<!-- Logo -->
+							<div class="logo_container">
+								<div class="logo">
+									<div>uit</div>
+									<div>travel</div>
+									<div class="logo_image">
+										<img src="images/logo.png" alt="">
+									</div>
+								</div>
+							</div>
+							<div class="footer_about_text">Trang thông tin du lịch
+								trong nước.</div>
+							<div class="copyright">
+								Copyright &copy;
+								<script>
+									document.write(new Date().getFullYear());
+								</script>
+								. All rights reserved.
+							</div>
+						</div>
+					</div>
 
-                                <!-- Footer Latest Post -->
-                                <div class="footer_latest_item">
-                                    <div class="footer_latest_image"><img src="images/latest_1.jpg" alt="https://unsplash.com/@peecho"></div>
-                                    <div class="footer_latest_item_content">
-                                        <div class="footer_latest_item_title"><a href="#">Một kỳ nghỉ hoàn hảo</a>
-                                        </div>
-                                        <div class="footer_latest_item_date">Mar 25, 2019</div>
-                                    </div>
-                                </div>
+					<!-- Footer Column -->
+					<div class="col-lg-4 footer_col">
+						<div class="footer_latest">
+							<div class="footer_title">Tin mới nhất</div>
+							<div class="footer_latest_content">
 
-                                <!-- Footer Latest Post -->
-                                <div class="footer_latest_item">
-                                    <div class="footer_latest_image"><img src="images/latest_2.jpg" alt="https://unsplash.com/@sanfrancisco"></div>
-                                    <div class="footer_latest_item_content">
-                                        <div class="footer_latest_item_title"><a href="#">Mùa hè ở miền biển nhiệt đới</a>
-                                        </div>
-                                        <div class="footer_latest_item_date">Jan 09, 2018</div>
-                                    </div>
-                                </div>
+								<!-- Footer Latest Post -->
+								<div class="footer_latest_item">
+									<div class="footer_latest_image">
+										<img src="images/latest_1.jpg"
+											alt="https://unsplash.com/@peecho">
+									</div>
+									<div class="footer_latest_item_content">
+										<div class="footer_latest_item_title">
+											<a href="#">Một kỳ nghỉ hoàn hảo</a>
+										</div>
+										<div class="footer_latest_item_date">Mar 25, 2019</div>
+									</div>
+								</div>
 
-                            </div>
-                        </div>
-                    </div>
+								<!-- Footer Latest Post -->
+								<div class="footer_latest_item">
+									<div class="footer_latest_image">
+										<img src="images/latest_2.jpg"
+											alt="https://unsplash.com/@sanfrancisco">
+									</div>
+									<div class="footer_latest_item_content">
+										<div class="footer_latest_item_title">
+											<a href="#">Mùa hè ở miền biển nhiệt đới</a>
+										</div>
+										<div class="footer_latest_item_date">Jan 09, 2018</div>
+									</div>
+								</div>
 
-                    <!-- Footer Column -->
-                    <div class="col-lg-4 footer_col">
-                        <div class="tags footer_tags">
-                            <div class="footer_title">Tags</div>
-                            <ul class="tags_content d-flex flex-row flex-wrap align-items-start justify-content-start">
-                                <li class="tag"><a href="#">travel</a></li>
-                                <li class="tag"><a href="#">summer</a></li>
-                                <li class="tag"><a href="#">cruise</a></li>
-                                <li class="tag"><a href="#">beach</a></li>
-                                <li class="tag"><a href="#">offer</a></li>
-                                <li class="tag"><a href="#">vacation</a></li>
-                                <li class="tag"><a href="#">trip</a></li>
-                                <li class="tag"><a href="#">city break</a></li>
-                                <li class="tag"><a href="#">adventure</a></li>
-                            </ul>
-                        </div>
-                    </div>
+							</div>
+						</div>
+					</div>
 
-                </div>
-            </div>
-        </footer>
-    </div>
+					<!-- Footer Column -->
+					<div class="col-lg-4 footer_col">
+						<div class="tags footer_tags">
+							<div class="footer_title">Tags</div>
+							<ul
+								class="tags_content d-flex flex-row flex-wrap align-items-start justify-content-start">
+								<li class="tag"><a href="#">travel</a></li>
+								<li class="tag"><a href="#">summer</a></li>
+								<li class="tag"><a href="#">cruise</a></li>
+								<li class="tag"><a href="#">beach</a></li>
+								<li class="tag"><a href="#">offer</a></li>
+								<li class="tag"><a href="#">vacation</a></li>
+								<li class="tag"><a href="#">trip</a></li>
+								<li class="tag"><a href="#">city break</a></li>
+								<li class="tag"><a href="#">adventure</a></li>
+							</ul>
+						</div>
+					</div>
 
-    <script src="js/jquery-3.2.1.min.js"></script>
-    <script src="styles/bootstrap4/popper.js"></script>
-    <script src="styles/bootstrap4/bootstrap.min.js"></script>
-    <script src="plugins/greensock/TweenMax.min.js"></script>
-    <script src="plugins/greensock/TimelineMax.min.js"></script>
-    <script src="plugins/scrollmagic/ScrollMagic.min.js"></script>
-    <script src="plugins/greensock/animation.gsap.min.js"></script>
-    <script src="plugins/greensock/ScrollToPlugin.min.js"></script>
-    <script src="plugins/easing/easing.js"></script>
-    <script src="plugins/parallax-js-master/parallax.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCIwF204lFZg1y4kPSIhKaHEXMLYxxuMhA"></script>
-    <script src="js/contact_custom.js"></script>
-    <script src="js/tour_search.js"></script>
+				</div>
+			</div>
+		</footer>
+	</div>
+
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="styles/bootstrap4/popper.js"></script>
+	<script src="styles/bootstrap4/bootstrap.min.js"></script>
+	<script src="plugins/greensock/TweenMax.min.js"></script>
+	<script src="plugins/greensock/TimelineMax.min.js"></script>
+	<script src="plugins/scrollmagic/ScrollMagic.min.js"></script>
+	<script src="plugins/greensock/animation.gsap.min.js"></script>
+	<script src="plugins/greensock/ScrollToPlugin.min.js"></script>
+	<script src="plugins/easing/easing.js"></script>
+	<script src="plugins/parallax-js-master/parallax.min.js"></script>
+	<script
+		src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCIwF204lFZg1y4kPSIhKaHEXMLYxxuMhA"></script>
+	<script src="js/contact_custom.js"></script>
+	<script src="js/tour_search.js"></script>
 </body>
 
 </html>

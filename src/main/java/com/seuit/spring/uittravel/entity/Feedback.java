@@ -21,11 +21,24 @@ public class Feedback {
 	@Column(name="EMAIL")
 	private String email;
 	
+	@Column(name="TITLE")
+	private String title;
+	
 	@Column(name="CONTENT")
 	private String content;
 
 	@Column(name="STATUS")
 	private Integer status;
+	
+	
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
 	public Integer getId() {
 		return id;
@@ -67,10 +80,14 @@ public class Feedback {
 		this.status = status;
 	}
 
-	public Feedback(String name, String email, String content, Integer status) {
+	
+
+	public Feedback(Integer id, String name, String email, String title, String content, Integer status) {
 		super();
+		this.id = id;
 		this.name = name;
 		this.email = email;
+		this.title = title;
 		this.content = content;
 		this.status = status;
 	}
@@ -81,9 +98,11 @@ public class Feedback {
 
 	@Override
 	public String toString() {
-		return "Feedback [id=" + id + ", name=" + name + ", email=" + email + ", content=" + content + ", status="
-				+ status + "]";
+		return "Feedback [id=" + id + ", name=" + name + ", email=" + email + ", title=" + title + ", content="
+				+ content + ", status=" + status + "]";
 	}
+
+	
 	
 	
 }
