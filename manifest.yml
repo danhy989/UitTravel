@@ -1,0 +1,9 @@
+---
+applications:
+- name: uittravel2019
+  memory: 1GB
+  path: target\UITTravel-0.0.1-SNAPSHOT.jar
+  health-check-http-endpoint: /actuator
+  health-check-type: http
+  services:
+  - uittraveldb
