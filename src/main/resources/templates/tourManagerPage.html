@@ -309,14 +309,18 @@ table.table .avatar {
 				<thead>
 					<tr>
 						<th>Name</th>
-						<th>Image</th>
+						<th align="center" width="100">Image</th>
 						<th>Action</th>
 					</tr>
 				</thead>
+				
 				<tbody th:each="tourTempt : ${listTour}">
+				
 					<tr>
-						<td th:text="${tourTempt.name}"></td>
-						<td th:text="${tourTempt.image}"></td>
+						<td align="center" th:text="${tourTempt.name}"></td>
+						<td width="100">
+						<img alt="" th:src="${tourTempt.image}" height="200" width="200">
+						</td>
 						<td>
 							<form action="#"
 								th:action="@{/manager/tour/editTourForm/{tourId}(tourId=${tourTempt.id})}"
